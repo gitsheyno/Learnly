@@ -2,6 +2,7 @@ import React from "react";
 import Image from "next/image";
 import sample from "../../public/sample.png";
 import { Button } from "@nextui-org/react";
+import { IoIosArrowForward } from "react-icons/io";
 export default function Banner() {
   return (
     <div className="mx-auto bg-pink-400">
@@ -12,6 +13,7 @@ export default function Banner() {
           </h1>
           <Button variant="shadow" className="w-60 bg-black text-white">
             Get Started
+            <IoIosArrowForward className="text-xl ml-4" />
           </Button>
         </div>
         <Image

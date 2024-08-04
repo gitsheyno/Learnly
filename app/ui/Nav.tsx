@@ -3,6 +3,7 @@ import Banner from "./Banner";
 import Infos from "./Infos";
 import Categories from "./Categories";
 import TutorsSlider from "./TutorsSlider";
+import Guides from "./Guides";
 import {
   Navbar,
   NavbarBrand,
@@ -55,18 +56,20 @@ export default function Nav() {
                 Find Tutors
               </Link>
             </NavbarItem>
-            <NavbarItem isActive>
-              <Link href="#" aria-current="page">
+            <NavbarItem>
+              <Link color="foreground" href="#" aria-current="page">
                 Become Tutors
               </Link>
             </NavbarItem>
           </NavbarContent>
           <NavbarContent justify="end">
             <NavbarItem className="hidden lg:flex">
-              <Link href="#">Login</Link>
+              <Link color="foreground" href="#">
+                Login
+              </Link>
             </NavbarItem>
             <NavbarItem>
-              <Button as={Link} color="primary" href="#" variant="flat">
+              <Button as={Link} color="default" href="#" variant="flat">
                 Sign Up
               </Button>
             </NavbarItem>
@@ -96,7 +99,10 @@ export default function Nav() {
       <Banner />
       <Infos />
       <Categories />
+
       <TutorsSlider />
+
+      <Guides />
     </>
   );
 }

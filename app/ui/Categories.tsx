@@ -1,4 +1,6 @@
 import React from "react";
+//TODO it should be slot
+
 import { Card, CardBody } from "@nextui-org/react";
 import { IoIosArrowForward } from "react-icons/io";
 import Link from "next/link";
