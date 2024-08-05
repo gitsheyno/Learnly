@@ -4,6 +4,7 @@ import Infos from "./Infos";
 import Categories from "./Categories";
 import TutorsSlider from "./TutorsSlider";
 import Guides from "./Guides";
+import BecomeTutor from "./BecomeTutor";
 import {
   Navbar,
   NavbarBrand,
@@ -101,8 +102,8 @@ export default function Nav() {
       <Categories />
 
       <TutorsSlider />
-
       <Guides />
+      <BecomeTutor />
     </>
   );
 }

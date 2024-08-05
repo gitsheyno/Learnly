@@ -1,5 +1,14 @@
 import React from "react";
-import { Card, CardFooter, Image, Button, CardHeader, CardBody } from "@nextui-org/react";
+import {
+  Card,
+  CardFooter,
+  Image,
+  Button,
+  CardHeader,
+  CardBody,
+} from "@nextui-org/react";
+
+//TODO it should be a slot
 
 interface Card {
   img: string;
@@ -64,45 +73,57 @@ const guideData: Guide[] = [
 
 export default function Guides() {
   return (
-    <section className="max-w-8xl px-6 text-center  mx-auto flex flex-col justify-between items-center mt-60 gap-16 ">
-      <h2 className="text-5xl font-bold">How Learnly works:</h2>
+    <section className="max-w-6xl px-6 text-center  mx-auto flex flex-col justify-between items-center mt-60">
+      <h2 className="text-5xl font-bold mb-16">How Learnly works:</h2>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3  gap-4">
-      {guideData.map((item, index) => (
-            <Card
-              key={index}
-              isFooterBlurred
-              radius="lg"
-              className="border-1"
-            >
-                <CardHeader className="flex flex-col items-start gap-3">
-                    <p className={`${item.color} px-3 py-1 rounded-md font-semibold`}>{index+1}</p>
-                    <h4 className="text-3xl font-bold">{item.title}</h4>
-                </CardHeader>
-                <CardBody>
-                    {item.description}
-                </CardBody>
-                <CardFooter>
-                    {typeof(item.information) === "object" ? 
-                    <div className="flex flex-col items-start gap-4">
-                    {item.information.map((card,index)=>(
-                        <Card className="flex flex-row items-center">
-                            <Image src={card.img}/>
-                            <CardBody>
-                                <p>{card.name}</p>
-                                <p className="text-xs text-gray-600">{card.title}</p>
-                                <p className="text-xs text-gray-600" >{card.info}</p>
-                            </CardBody>
-                        </Card>
-                    ))}
-                    </div> 
-                    :
-                     <>
-                     <Image src={item.information}/>
-                     </>}
-                </CardFooter>
-            </Card>
-          ))}
-          </div>
+        {guideData.map((item, index) => (
+          <Card
+            key={index}
+            isFooterBlurred
+            radius="lg"
+            className="border-1 py-6 px-2"
+          >
+            <CardHeader className="flex flex-col items-start gap-3">
+              <p
+                className={`${item.color} px-4 py-2  text-2xl text-bold rounded-md font-semibold`}
+              >
+                {index + 1}
+              </p>
+              <h4 className="text-3xl font-bold">{item.title}</h4>
+            </CardHeader>
+            <CardBody>{item.description}</CardBody>
+            <CardFooter>
+              {typeof item.information === "object" ? (
+                <div className="flex flex-col items-start gap-4">
+                  {item.information.map((card, index) => (
+                    <Card className="flex flex-row items-center" key={index}>
+                      <Image src={card.img} />
+                      <CardBody>
+                        <p>{card.name}</p>
+                        <p className="text-xs text-gray-600">{card.title}</p>
+                        <p className="text-xs text-gray-600">{card.info}</p>
+                      </CardBody>
+                    </Card>
+                  ))}
+                </div>
+              ) : (
+                <div className="mx-auto">
+                  <Image
+                    className="w-[400px]  object-contain"
+                    src={item.information}
+                  />
+                </div>
+              )}
+            </CardFooter>
+          </Card>
+        ))}
+      </div>
+      <div className="bg-pink-400 my-8 w-full py-6 rounded-lg flex flex-col items-center justify-center gap-4">
+        <h4 className="text-3xl font-bold">Lessons you’ll love. Guaranteed.</h4>
+        <p className="text-lg">
+          Try another tutor for free if you’re not satisfied.
+        </p>
+      </div>
     </section>
   );
 }
