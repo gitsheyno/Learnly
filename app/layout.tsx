@@ -3,10 +3,8 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import Nav from "./ui/Nav";
 import Footer from "./ui/Footer";
-import TutorsSlider from "./ui/TutorsSlider";
-import Guides from "./ui/Guides";
-import BecomeTutor from "./ui/BecomeTutor";
-import { usePathname } from "next/navigation";
+import NextUIProvider from "./NextUIProvider";
+import RootLayoutComponents from "./ui/RootLayoutComponents";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
@@ -32,16 +30,18 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <Nav />
-
-        {children}
-        {infos}
-        {categories}
-
-        {tutorslider}
-        {guides}
-        {becomeTutor}
-        <Footer />
+        <NextUIProvider>
+          <Nav />
+          <RootLayoutComponents
+            children={children}
+            infos={infos}
+            categories={categories}
+            tutorslider={tutorslider}
+            guides={guides}
+            becomeTutor={becomeTutor}
+          />
+          <Footer />
+        </NextUIProvider>
       </body>
     </html>
   );

@@ -1,5 +1,5 @@
 "use client";
-
+import Link from "next/link";
 import {
   Navbar,
   NavbarBrand,
@@ -8,7 +8,6 @@ import {
   NavbarMenuToggle,
   NavbarMenu,
   NavbarMenuItem,
-  Link,
   Button,
 } from "@nextui-org/react";
 import { useState } from "react";
@@ -42,7 +41,9 @@ export default function Nav() {
             />
             <NavbarBrand>
               <AcmeLogo />
-              <p className="font-bold text-inherit">ACME</p>
+              <Link href="/" className="font-bold text-inherit">
+                ACME
+              </Link>
             </NavbarBrand>
           </NavbarContent>
 
@@ -83,7 +84,6 @@ export default function Nav() {
                   }
                   className="w-full"
                   href="#"
-                  size="lg"
                 >
                   {item}
                 </Link>
