@@ -1,7 +1,6 @@
 import React, { ReactNode } from "react";
 import { Card, CardBody } from "@nextui-org/react";
 
-
 const data = [
   { number: "400,000", description: "Experienced tutors" },
   { number: "300,000", description: "5-star tutor reviews" },

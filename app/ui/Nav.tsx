@@ -48,7 +48,7 @@ export default function Nav() {
 
           <NavbarContent className="hidden sm:flex gap-4" justify="center">
             <NavbarItem>
-              <Link color="foreground" href="#">
+              <Link color="foreground" href="/tutors">
                 Find Tutors
               </Link>
             </NavbarItem>

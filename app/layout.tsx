@@ -6,6 +6,7 @@ import Footer from "./ui/Footer";
 import TutorsSlider from "./ui/TutorsSlider";
 import Guides from "./ui/Guides";
 import BecomeTutor from "./ui/BecomeTutor";
+import { usePathname } from "next/navigation";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
@@ -17,21 +18,29 @@ export default function RootLayout({
   children,
   infos,
   categories,
+  guides,
+  tutorslider,
+  becomeTutor,
 }: {
   children: React.ReactNode;
   infos: React.ReactNode;
+  guides: React.ReactNode;
   categories: React.ReactNode;
+  tutorslider: React.ReactNode;
+  becomeTutor: React.ReactNode;
 }) {
   return (
     <html lang="en">
       <body className={inter.className}>
         <Nav />
+
         {children}
         {infos}
         {categories}
-        <TutorsSlider />
-        <Guides />
-        <BecomeTutor />
+
+        {tutorslider}
+        {guides}
+        {becomeTutor}
         <Footer />
       </body>
     </html>

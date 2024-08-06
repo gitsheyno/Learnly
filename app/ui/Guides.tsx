@@ -8,7 +8,6 @@ import {
   CardBody,
 } from "@nextui-org/react";
 
-
 interface Card {
   img: string;
   name: string;
