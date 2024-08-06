@@ -28,8 +28,8 @@ export default function Nav() {
     "Log Out",
   ];
   return (
-    <>
-      <div className="bg-pink-400">
+    <div className="bg-pink-400 w-full">
+      <div className="bg-pink-400  max-w-6xl mx-auto">
         <Navbar
           className=" bg-pink-400  mx-auto  container max-w-6xl"
           onMenuOpenChange={setIsMenuOpen}
@@ -92,12 +92,6 @@ export default function Nav() {
           </NavbarMenu>
         </Navbar>
       </div>
-      {/* <Banner /> */}
-      {/* <Infos /> */}
-      {/* <Categories /> */}
-      {/* <TutorsSlider /> */}
-      {/* <Guides /> */}
-      {/* <BecomeTutor /> */}
-    </>
+    </div>
   );
 }

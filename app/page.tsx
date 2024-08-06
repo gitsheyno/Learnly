@@ -6,9 +6,6 @@ export default function Home() {
   return (
     <>
       <Banner />
-      {/* <TutorsSlider/>
-      <Guides/>
-      <BecomeTutor/> */}
     </>
   );
 }

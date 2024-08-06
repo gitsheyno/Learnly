@@ -1,13 +1,17 @@
 import React from "react";
-import {
-  Card,
-  CardHeader,
-  CardBody,
-  CardFooter,
-  Divider,
-  Button,
-} from "@nextui-org/react";
+import BredCrumbs from "./BredCrumbs";
+import { Button } from "@nextui-org/react";
 import Image from "next/image";
+import AccordionComponent from "./Accardion";
+const colors = [
+  "foreground",
+  "primary",
+  "secondary",
+  "success",
+  "warning",
+  "danger",
+];
+
 const data = [
   {
     image:
@@ -107,7 +111,7 @@ const data = [
 export default function TutorList() {
   return (
     <section className="max-w-full px-6 text-center my-24 mx-auto flex flex-col justify-between items-center">
-      <div className="flex flex-col gap-6">
+      <div className="flex flex-col gap-6 mb-6">
         {data.map((item, index) => (
           <div key={index}>
             <div className="grid grid-cols-6 gap-4 p-8 border-1 border-black">
@@ -129,12 +133,12 @@ export default function TutorList() {
                   </div>
                 </div>
                 <div className="flex flex-col gap-2 items-start text-gray-400">
-                <p>🎓 {item.language}</p>
-                <p>
-                 👤  {item.students} {item.lessons}
-                </p>
-                <p> ✍︎  {item.benefit}</p>
-                <p className="text-left text-black">{item.speakLang}</p>
+                  <p>🎓 {item.language}</p>
+                  <p>
+                    👤 {item.students} {item.lessons}
+                  </p>
+                  <p> ✍︎ {item.benefit}</p>
+                  <p className="text-left text-black">{item.speakLang}</p>
                 </div>
               </div>
 
@@ -151,6 +155,9 @@ export default function TutorList() {
           </div>
         ))}
       </div>
+
+      <BredCrumbs />
+      <AccordionComponent />
     </section>
   );
 }
