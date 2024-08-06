@@ -1,11 +1,5 @@
 "use client";
-import Banner from "./Banner";
-import Infos from "./Infos";
-import Categories from "./Categories";
-import TutorsSlider from "./TutorsSlider";
-import Guides from "./Guides";
-import BecomeTutor from "./BecomeTutor";
-import Footer from "./Footer";
+
 import {
   Navbar,
   NavbarBrand,
@@ -98,14 +92,12 @@ export default function Nav() {
           </NavbarMenu>
         </Navbar>
       </div>
-      <Banner />
-      <Infos />
-      <Categories />
-
-      <TutorsSlider />
-      <Guides />
-      <BecomeTutor />
-      <Footer/>
+      {/* <Banner /> */}
+      {/* <Infos /> */}
+      {/* <Categories /> */}
+      {/* <TutorsSlider /> */}
+      {/* <Guides /> */}
+      {/* <BecomeTutor /> */}
     </>
   );
 }

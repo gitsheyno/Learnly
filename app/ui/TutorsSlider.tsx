@@ -1,6 +1,5 @@
 "use client";
 
-//TODO it should be slot
 import React from "react";
 import { Card, CardFooter, Image, Button } from "@nextui-org/react";
 import sample from "../../public/sample.png";

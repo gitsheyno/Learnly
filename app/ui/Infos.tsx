@@ -1,7 +1,6 @@
 import React, { ReactNode } from "react";
 import { Card, CardBody } from "@nextui-org/react";
 
-//TODO it should be a separate slot
 
 const data = [
   { number: "400,000", description: "Experienced tutors" },

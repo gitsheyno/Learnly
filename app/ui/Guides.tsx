@@ -8,7 +8,6 @@ import {
   CardBody,
 } from "@nextui-org/react";
 
-//TODO it should be a slot
 
 interface Card {
   img: string;
