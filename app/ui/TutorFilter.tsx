@@ -13,7 +13,6 @@ const data = [
   "English",
   "English",
   "English",
-
 ];
 
 export default function TutorFilter() {

@@ -12,7 +12,11 @@ import {
 } from "@nextui-org/react";
 import { useState } from "react";
 import { AcmeLogo } from "./Logo";
-export default function NavDetail({isAuthenticated} : {isAuthenticated : boolean}) {
+export default function NavDetail({
+  isAuthenticated,
+}: {
+  isAuthenticated: boolean;
+}) {
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
 
   const menuItems = [
@@ -60,26 +64,31 @@ export default function NavDetail({isAuthenticated} : {isAuthenticated : boolean
             </NavbarItem>
           </NavbarContent>
           <NavbarContent justify="end">
-              {!isAuthenticated ? 
+            {!isAuthenticated ? (
               <>
-            <NavbarItem className="hidden lg:flex">
-              <Link color="foreground" href="/signin">
-                Login
-              </Link>
-            </NavbarItem>
-            <NavbarItem>
-              <Button as={Link} color="default" href="signup" variant="flat">
-                Sign Up
-              </Button>
-            </NavbarItem>
-            </>
-            :
-            <NavbarItem>
-            <Button as={Link} color="default" href="/" variant="flat">
-              Sign out
-            </Button>
-          </NavbarItem>
-}
+                <NavbarItem className="hidden lg:flex">
+                  <Link color="foreground" href="/signin">
+                    Login
+                  </Link>
+                </NavbarItem>
+                <NavbarItem>
+                  <Button
+                    as={Link}
+                    color="default"
+                    href="signup"
+                    variant="flat"
+                  >
+                    Sign Up
+                  </Button>
+                </NavbarItem>
+              </>
+            ) : (
+              <NavbarItem>
+                <Button as={Link} color="default" href="/" variant="flat">
+                  Sign out
+                </Button>
+              </NavbarItem>
+            )}
           </NavbarContent>
           <NavbarMenu className="">
             {menuItems.map((item, index) => (

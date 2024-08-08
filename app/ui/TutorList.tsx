@@ -156,7 +156,7 @@ export default function TutorList() {
         ))}
       </div>
 
-      <BredCrumbs />
+      <BredCrumbs data={[{ title: "Tutors" }, { title: "Find a Tutor" }]} />
       <AccordionComponent />
     </section>
   );

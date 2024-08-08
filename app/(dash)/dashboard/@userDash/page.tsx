@@ -7,7 +7,7 @@ import { getCurrentUser } from "@/utils/users";
 import { Button } from "@nextui-org/react";
 export default async function page() {
   const user = await getCurrentUser();
-  console.log(user)
+  console.log(user);
   return (
     <>
       {user ? (
