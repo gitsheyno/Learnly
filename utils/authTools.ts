@@ -58,14 +58,16 @@ export const signin = async ({
 export const signup = async ({
   email,
   password,
+  role,
 }: {
   email: string;
   password: string;
+  role: string;
 }) => {
   const hashedPW = await hashPW(password);
   const rows = await db
     .insert(users)
-    .values({ email, password: hashedPW })
+    .values({ email, password: hashedPW, role })
     .returning({
       id: users.id,
       email: users.email,

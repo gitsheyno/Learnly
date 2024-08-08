@@ -4,8 +4,6 @@ import React from "react";
 import { Breadcrumbs, BreadcrumbItem } from "@nextui-org/react";
 
 export default function BredCrumbs() {
-  const url = window.location.href;
-
   return (
     <div className="text-left w-full my-4">
       <Breadcrumbs>

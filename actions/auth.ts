@@ -8,12 +8,14 @@ import { COOKIE_NAME } from "@/utils/constants";
 const authSchema = z.object({
   email: z.string().email(),
   password: z.string(),
+  role: z.string(),
 });
 
 export const registerUser = async (prevState: any, formData: FormData) => {
   const data = authSchema.parse({
     email: formData.get("email"),
     password: formData.get("password"),
+    role: "user",
   });
 
   try {
@@ -30,6 +32,7 @@ export const signinUser = async (prevState: any, formData: FormData) => {
   const data = authSchema.parse({
     email: formData.get("email"),
     password: formData.get("password"),
+    role: "user",
   });
 
   try {

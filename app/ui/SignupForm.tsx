@@ -1,9 +1,8 @@
-
 "use client";
 
 import { useFormState } from "react-dom";
 import { Input, Button } from "@nextui-org/react";
-import { registerUser } from '@/actions/auth'
+import { registerUser } from "@/actions/auth";
 import Link from "next/link";
 import Submit from "./SubmitButton";
 

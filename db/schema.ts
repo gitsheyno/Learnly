@@ -21,5 +21,5 @@ export const users = sqliteTable("users", {
   createdAt: createdAt(),
   email: text("email").unique().notNull(),
   password: text("password").notNull(),
-  role:text("role").notNull()
+  role: text("role").notNull(),
 });

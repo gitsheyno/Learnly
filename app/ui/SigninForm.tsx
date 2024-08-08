@@ -2,7 +2,7 @@
 
 import { useFormState } from "react-dom";
 import { Input, Button } from "@nextui-org/react";
-import { signinUser } from '@/actions/auth'
+import { signinUser } from "@/actions/auth";
 import Link from "next/link";
 import Submit from "./SubmitButton";
 
