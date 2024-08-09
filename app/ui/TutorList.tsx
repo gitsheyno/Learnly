@@ -108,9 +108,10 @@ const data = [
 
 //TODO check separate route if its possible
 
-export default function TutorList() {
+export default function TutorList({query} : {query  : string}) {
   return (
     <section className="max-w-full px-6 text-center my-24 mx-auto flex flex-col justify-between items-center">
+      {query}
       <div className="flex flex-col gap-6 mb-6">
         {data.map((item, index) => (
           <div key={index}>

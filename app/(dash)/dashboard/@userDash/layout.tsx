@@ -16,14 +16,12 @@ const Dash = async ({
 
   return (
     <>
-  
-        <div className="flex max-w-6xl justify-end px-4 items-center gap-6 mx-auto py-8">
-          {children}
-          {messages}
-          {likes}
-          {helps}
-        </div>
-    
+      <div className="flex max-w-6xl justify-end px-4 items-center gap-6 mx-auto py-8">
+        {children}
+        {messages}
+        {likes}
+        {helps}
+      </div>
     </>
   );
 };

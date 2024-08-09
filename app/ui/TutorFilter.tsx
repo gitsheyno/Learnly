@@ -1,21 +1,43 @@
+'use client'
+
 import { Button } from "@nextui-org/react";
 import Link from "next/link";
 import Image from "next/image";
-import React from "react";
-
+import React, { useTransition } from "react";
+import { usePathname, useSearchParams ,useRouter} from "next/navigation";
+import clsx from 'clsx';
+import { useDebouncedCallback } from 'use-debounce';
 const data = [
   "English",
-  "English",
-  "English",
-  "English",
-  "English",
-  "English",
-  "English",
-  "English",
-  "English",
+  "German",
+  "French",
+  "Italian",
+  "Korean",
+  "Japanese",
+  "Spanish",
+
 ];
 
+
 export default function TutorFilter() {
+  const searchParams = useSearchParams();
+  const { replace } = useRouter();
+  const pathname = usePathname();
+  
+  const handleSearch = useDebouncedCallback((term: string) => {
+    const params = new URLSearchParams(searchParams);
+  
+    if (term) {
+      params.set('query', term);
+    } else {
+      params.delete('query');
+    }
+  
+    replace(`${pathname}?${params.toString()}`);
+  }, 300);
+
+  
+
   return (
     <div className="grid grid-cols-1 md:grid-cols-2  justify-center items-center">
       <div className="flex flex-col items-start gap-4 py-8">
@@ -26,12 +48,25 @@ export default function TutorFilter() {
           Looking for an online tutor? Learnly is the leading online learning
           platform worldwide.
         </p>
+        <input type="text" />
         <p className="font-bold">I want to learn</p>
+        <input
+  className="peer block w-full rounded-md border border-gray-200 py-[9px] pl-10 text-sm outline-2 placeholder:text-gray-500"
+
+  onChange={(e) => {
+    handleSearch(e.target.value);
+  }}
+  defaultValue={searchParams.get('query')?.toString()}
+/>
         <ul className="flex gap-2 flex-wrap">
           {data.map((item, index) => (
+            
+       
             <li
               className="border-1 text-xs cursor-pointer md:text-lg rounded-md px-4 py-1  hover:bg-gray-200"
+              onClick={()=>handleSearch(item)}
               key={index}
+            
             >
               {item}
             </li>
