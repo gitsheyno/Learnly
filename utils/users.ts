@@ -8,10 +8,12 @@ import { RequestCookie } from "next/dist/compiled/@edge-runtime/cookies";
 
 export const getCurrentUser = cache(async () => {
   const token = cookies().get(COOKIE_NAME);
-  if (!token) redirect("/");
+  // if (!token) redirect("/");
+  if (!token) return null;
 
   const user = await getUserFromToken(token as RequestCookie);
-  if (!user) redirect("/");
+  // if (!user) redirect("/");
+  if (!user) return null;
 
   return token;
 });
