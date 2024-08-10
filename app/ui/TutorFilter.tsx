@@ -30,15 +30,19 @@ const links = [
 ];
 
 export default function TutorFilter() {
-  useEffect(() => {
-    const params = new URLSearchParams(searchParams);
-    params.set("query", "English");
-    replace(`${pathname}?${params.toString()}`);
-  }, []);
+
 
   const searchParams = useSearchParams();
   const { replace } = useRouter();
   const pathname = usePathname();
+
+  useEffect(() => {
+
+      const params = new URLSearchParams(searchParams);
+      params.set("query", "English");
+      replace(`${pathname}?${params.toString()}`);
+
+  }, []);
 
   const handleSearch = useDebouncedCallback((term: string) => {
     const params = new URLSearchParams(searchParams);

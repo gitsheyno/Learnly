@@ -50,8 +50,8 @@ export default function TutorCard({ item }: { item: TutorCard }) {
 
         <div className="col-start-2 col-span-3 flex flex-col items-start"></div>
         <div className=" col-start-5 col-span-2 flex flex-col items-start row-start-1 row-span-1 gap-4 justify-center">
-          <Button className="w-full bg-pink-400 border-1 border-black">
-            <Link href="#">Book a lesson</Link>
+          <Button as={Link} href={`/dashboard/${item.name}`} className="w-full bg-pink-400 border-1 border-black">
+            Book a lesson    
           </Button>
           <SendMessageModal isOpen={isOpen} onOpenChange={onOpenChange} />
           <Button onClick={onOpen} className="w-full border-1 bg-white ">
