@@ -11,7 +11,7 @@ import {
   useDisclosure,
 } from "@nextui-org/react";
 import { MdOutlineMessage } from "react-icons/md";
-export default function UserMessages({data} : {data:string[]}) {
+export default function UserMessages({ data }: { data: string[] }) {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   return (
     <>
@@ -19,7 +19,7 @@ export default function UserMessages({data} : {data:string[]}) {
         onClick={onOpen}
         className="text-2xl cursor-pointer hover:text-red-500"
       />
-        <Modal isOpen={isOpen} onOpenChange={onOpenChange}>
+      <Modal isOpen={isOpen} onOpenChange={onOpenChange}>
         <ModalContent>
           {(onClose) => (
             <>
@@ -47,7 +47,7 @@ export default function UserMessages({data} : {data:string[]}) {
                   Close
                 </Button>
 
-                <Button className="bg-pink-400 text-black"  onPress={onClose}>
+                <Button className="bg-pink-400 text-black" onPress={onClose}>
                   Browse tutors
                 </Button>
               </ModalFooter>

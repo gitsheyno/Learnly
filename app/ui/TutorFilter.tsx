@@ -1,12 +1,13 @@
-'use client'
+"use client";
 
+import { useEffect } from "react";
 import { Button } from "@nextui-org/react";
 import Link from "next/link";
 import Image from "next/image";
 import React, { useTransition } from "react";
-import { usePathname, useSearchParams ,useRouter} from "next/navigation";
-import clsx from 'clsx';
-import { useDebouncedCallback } from 'use-debounce';
+import { usePathname, useSearchParams, useRouter } from "next/navigation";
+import clsx from "clsx";
+import { useDebouncedCallback } from "use-debounce";
 const data = [
   "English",
   "German",
@@ -15,29 +16,49 @@ const data = [
   "Korean",
   "Japanese",
   "Spanish",
-
 ];
 
+const links = [
+  { route: "/dashboard", name: "Home" },
+  { route: "/dashboard/English", name: "English" },
+  { route: "/dashboard/German", name: "German" },
+  { route: "/dashboard/French", name: "French" },
+  { route: "/dashboard/Italian", name: "Italian" },
+  { route: "/dashboard/Korean", name: "Korean" },
+  { route: "/dashboard/Japanese", name: "Japanese" },
+  { route: "/dashboard/Spanish", name: "Spanish" },
+];
 
 export default function TutorFilter() {
+  useEffect(() => {
+    const params = new URLSearchParams(searchParams);
+    params.set("query", "English");
+    replace(`${pathname}?${params.toString()}`);
+  }, []);
+
   const searchParams = useSearchParams();
   const { replace } = useRouter();
   const pathname = usePathname();
-  
+
   const handleSearch = useDebouncedCallback((term: string) => {
     const params = new URLSearchParams(searchParams);
-  
+
     if (term) {
-      params.set('query', term);
+      params.set("query", term);
     } else {
-      params.delete('query');
+      params.delete("query");
     }
-  
+
     replace(`${pathname}?${params.toString()}`);
+    console.log(pathname, params.get("query"));
   }, 300);
 
-  
+  const isActive = (route: string) => {
+    const params = new URLSearchParams(searchParams);
 
+    const val = params.get("query");
+    return val ? `/dashboard/${params.get("query")}` : `/dashboard/English`;
+  };
   return (
     <div className="grid grid-cols-1 md:grid-cols-2  justify-center items-center">
       <div className="flex flex-col items-start gap-4 py-8">
@@ -48,25 +69,18 @@ export default function TutorFilter() {
           Looking for an online tutor? Learnly is the leading online learning
           platform worldwide.
         </p>
-        <input type="text" />
         <p className="font-bold">I want to learn</p>
-        <input
-  className="peer block w-full rounded-md border border-gray-200 py-[9px] pl-10 text-sm outline-2 placeholder:text-gray-500"
-
-  onChange={(e) => {
-    handleSearch(e.target.value);
-  }}
-  defaultValue={searchParams.get('query')?.toString()}
-/>
         <ul className="flex gap-2 flex-wrap">
           {data.map((item, index) => (
-            
-       
             <li
-              className="border-1 text-xs cursor-pointer md:text-lg rounded-md px-4 py-1  hover:bg-gray-200"
-              onClick={()=>handleSearch(item)}
+              className={clsx(
+                "border-1 text-xs cursor-pointer md:text-lg rounded-md px-4 py-1  hover:bg-gray-200",
+                {
+                  "border-black": isActive(item) === `/dashboard/${item}`,
+                },
+              )}
+              onClick={() => handleSearch(item)}
               key={index}
-            
             >
               {item}
             </li>

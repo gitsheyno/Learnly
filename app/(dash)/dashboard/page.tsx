@@ -8,7 +8,7 @@ export default async function page({
     query?: string;
   };
 }) {
-  const query = searchParams?.query || '';
+  const query = searchParams?.query || "";
   return (
     <div className="max-w-6xl px-6  text-center  mx-auto flex flex-col justify-between items-center ">
       <TutorFilter />

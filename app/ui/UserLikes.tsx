@@ -48,7 +48,7 @@ export default function UserLikes({ data }: { data: string[] }) {
                   Close
                 </Button>
 
-                <Button className="bg-pink-400 text-black"  onPress={onClose}>
+                <Button className="bg-pink-400 text-black" onPress={onClose}>
                   Browse tutors
                 </Button>
               </ModalFooter>

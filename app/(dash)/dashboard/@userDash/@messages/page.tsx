@@ -5,5 +5,5 @@ type FavoriteTutor = string;
 export default async function page() {
   const user = await getCurrentUser();
   const favoriteTutors: FavoriteTutor[] = [];
-  return <>{user ? <UserMessages data = {favoriteTutors} /> : null}</>;
+  return <>{user ? <UserMessages data={favoriteTutors} /> : null}</>;
 }

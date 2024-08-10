@@ -8,16 +8,14 @@ export default async function tutors({
 }: {
   searchParams?: {
     query?: string;
-
   };
 }) {
+  const query = searchParams?.query || "";
 
-  const query = searchParams?.query || '';
-  
   return (
     <section className="max-w-6xl px-6 text-center  mx-auto flex flex-col justify-between items-center ">
       <TutorFilter />
-      <TutorList query ={query} />
+      <TutorList query={query} />
     </section>
   );
 }
