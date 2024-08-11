@@ -1,3 +1,5 @@
+"use client";
+import { usePathname } from "next/navigation";
 import React from "react";
 const UseDashboardLayout = ({
   children,
@@ -6,10 +8,17 @@ const UseDashboardLayout = ({
   children: React.ReactNode;
   userDash: React.ReactNode;
 }) => {
+  const path = usePathname();
   return (
     <div className="border-2">
-      {userDash}
-      {children}
+      {path === "/dashboard" ? (
+        <>
+          {userDash}
+          {children}
+        </>
+      ) : (
+        <>{children}</>
+      )}
     </div>
   );
 };

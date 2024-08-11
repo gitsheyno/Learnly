@@ -230,15 +230,11 @@ const data: TutorCard[] = [
   },
 ];
 
-
 //TODO check separate route if its possible
 
 export default function TutorList({ query }: { query: string }) {
+  const filteredData = data.filter((item) => item.category === query);
 
-  const filteredData = data.filter((item)=>(
-    item.category === query
-  ))
-  
   return (
     <section className="max-w-full px-6 text-center my-24 mx-auto flex flex-col justify-between items-center">
       <div className="flex flex-col gap-6 mb-6">

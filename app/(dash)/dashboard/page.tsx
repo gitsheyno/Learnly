@@ -1,6 +1,7 @@
 import React from "react";
 import TutorList from "@/app/ui/TutorList";
 import TutorFilter from "@/app/ui/TutorFilter";
+import Link from "next/link";
 export default async function page({
   searchParams,
 }: {

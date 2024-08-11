@@ -30,18 +30,14 @@ const links = [
 ];
 
 export default function TutorFilter() {
-
-
   const searchParams = useSearchParams();
   const { replace } = useRouter();
   const pathname = usePathname();
 
   useEffect(() => {
-
-      const params = new URLSearchParams(searchParams);
-      params.set("query", "English");
-      replace(`${pathname}?${params.toString()}`);
-
+    const params = new URLSearchParams(searchParams);
+    params.set("query", "English");
+    replace(`${pathname}?${params.toString()}`);
   }, []);
 
   const handleSearch = useDebouncedCallback((term: string) => {
@@ -54,7 +50,6 @@ export default function TutorFilter() {
     }
 
     replace(`${pathname}?${params.toString()}`);
-    console.log(pathname, params.get("query"));
   }, 300);
 
   const isActive = (route: string) => {
