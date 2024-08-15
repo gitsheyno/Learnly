@@ -10,15 +10,36 @@ import {
   Button,
   useDisclosure,
 } from "@nextui-org/react";
+
+import { changeMessageStatus } from "@/actions/bookingRecipt";
+
+type Message = {
+  description: string | null;
+  status : string
+};
 import { MdOutlineMessage } from "react-icons/md";
-export default function UserMessages({ data }: { data: string[] }) {
+export default function UserMessages({ data }: { data: Message[] }) {
+  console.log("fata" , data)
+
+  const handleClick = async ()=>{
+    onOpen()
+    await changeMessageStatus()
+  }
+
+  const unReadMessages = data.reduce((item, acc) => {
+    if (acc.status === "unread") {
+        item++;
+    }
+    return item; 
+}, 0);
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   return (
     <>
       <MdOutlineMessage
-        onClick={onOpen}
+        onClick={handleClick}
         className="text-2xl cursor-pointer hover:text-red-500"
       />
+      {unReadMessages > 0 ? <>{unReadMessages}</> : null} : messages
       <Modal isOpen={isOpen} onOpenChange={onOpenChange}>
         <ModalContent>
           {(onClose) => (
@@ -27,7 +48,7 @@ export default function UserMessages({ data }: { data: string[] }) {
                 {data.length ? (
                   <>
                     {data.map((item) => (
-                      <p>{item}</p>
+                      <p>{item.description}</p>
                     ))}
                   </>
                 ) : (

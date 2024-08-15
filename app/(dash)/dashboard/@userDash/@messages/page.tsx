@@ -1,9 +1,16 @@
 import React from "react";
 import UserMessages from "@/app/ui/UserMessages";
 import { getCurrentUser } from "@/utils/users";
-type FavoriteTutor = string;
+import { getMessages } from "@/utils/messages";
+
+type Message = {
+  description: string | null;
+  status : string
+};
 export default async function page() {
   const user = await getCurrentUser();
-  const favoriteTutors: FavoriteTutor[] = [];
-  return <>{user ? <UserMessages data={favoriteTutors} /> : null}</>;
+  const messages: Message[] = await getMessages(user?.id as string);
+  console.log("message", messages);
+  const favoriteTutors: Message[] = [];
+  return <>{user ? <UserMessages data={messages} /> : null}</>;
 }

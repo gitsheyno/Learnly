@@ -12,7 +12,6 @@ import {
 } from "@nextui-org/react";
 import { bookTutor } from "@/actions/bookinAction";
 import Image from "next/image";
-import { useState } from "react";
 type TutorCard = {
   category?: string;
   image: string;
@@ -25,9 +24,22 @@ type TutorCard = {
   cost: string;
   session: string;
 };
-export default function Booking({ data, id }: { data: TutorCard; id: string }) {
 
-  const updateUserWithId = bookTutor.bind(null, id)
+type User = {
+  id: string;
+  createdAt: string;
+  email: string;
+};
+export default function Booking({
+  data,
+  id,
+  user,
+}: {
+  data: TutorCard;
+  id: string;
+  user: User;
+}) {
+  const updateUserWithId = bookTutor.bind(null, user, id);
 
   return (
     <div className="p-16">
@@ -56,7 +68,7 @@ export default function Booking({ data, id }: { data: TutorCard; id: string }) {
             <Divider className="my-4" />
             <CardBody className="gap-6">
               <DatePicker
-              name="date"
+                name="date"
                 isRequired
                 onChange={(e) => console.log(e)}
                 label="Pick a date"
@@ -78,7 +90,9 @@ export default function Booking({ data, id }: { data: TutorCard; id: string }) {
             </CardBody>
             <Divider className="my-4" />
             <CardFooter>
-              <Button className="w-full bg-pink-400" type="submit">Submit</Button>
+              <Button className="w-full bg-pink-400" type="submit">
+                Submit
+              </Button>
             </CardFooter>
           </div>
         </Card>

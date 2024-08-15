@@ -23,3 +23,30 @@ export const users = sqliteTable("users", {
   password: text("password").notNull(),
   role: text("role").notNull(),
 });
+
+export const usersRelations = relations(users, ({ many }) => ({
+  messages: many(messages),
+}));
+
+export const messages = sqliteTable(
+  "events",
+  {
+    id: id(),
+    createdAt: createdAt(),
+    createdById: text("createdById").notNull(),
+    description: text("description"),
+
+    status: text("status", {
+      enum: ["unread", "read"],
+    })
+      .default("unread")
+      .notNull(),
+  },
+);
+
+export const messagesRelations = relations(messages, ({ one }) => ({
+  createdBy: one(users, {
+    fields: [messages.createdById],
+    references: [users.id],
+  }), // Many-to-one relation: many messages belong to one user
+}));

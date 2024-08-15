@@ -1,5 +1,6 @@
 import React from "react";
 import Booking from "@/app/ui/Booking";
+import { getCurrentUser } from "@/utils/users";
 
 type TutorCard = {
   category?: string;
@@ -13,8 +14,17 @@ type TutorCard = {
   cost: string;
   session: string;
 };
-
-export default function BookingPage({ params }: { params: { id: string } }) {
+type User = {
+  id: string;
+  createdAt: string;
+  email: string;
+};
+export default async function BookingPage({
+  params,
+}: {
+  params: { id: string };
+}) {
+  const user = await getCurrentUser();
   const data: TutorCard = {
     image:
       "https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=1528&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
@@ -33,7 +43,7 @@ export default function BookingPage({ params }: { params: { id: string } }) {
 
   return (
     <div>
-      <Booking data={data} id={params.id} />
+      <Booking data={data} id={params.id} user={user as User} />
     </div>
   );
 }
