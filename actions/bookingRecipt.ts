@@ -16,19 +16,22 @@ export const sendReceiptToUser = async (des: string) => {
     description: des,
   });
 
+  // await db.update(user)
+
   revalidateTag("dashboard:messages");
   revalidateTag("messages");
 };
 
-export const changeMessageStatus = async ()=>{
-    const user = await getCurrentUser();
+export const changeMessageStatus = async () => {
+  const user = await getCurrentUser();
 
-    await db.update(messages)
+  await db
+    .update(messages)
     .set({
-        status: "read"
+      status: "read",
     })
-    .where(eq(messages.createdById, user?.id as string)); 
+    .where(eq(messages.createdById, user?.id as string));
 
-      revalidateTag("dashboard:messages");
-      revalidateTag("messages");
-}
+  revalidateTag("dashboard:messages");
+  revalidateTag("messages");
+};

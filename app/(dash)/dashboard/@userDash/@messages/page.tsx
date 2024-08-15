@@ -5,7 +5,7 @@ import { getMessages } from "@/utils/messages";
 
 type Message = {
   description: string | null;
-  status : string
+  status: string;
 };
 export default async function page() {
   const user = await getCurrentUser();

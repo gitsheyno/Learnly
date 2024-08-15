@@ -10,7 +10,7 @@ export const getMessages = memoize(
       where: eq(messages.createdById, userId),
       columns: {
         description: true, // Select only the description column
-        status:true
+        status: true,
       },
     });
     return userMessages;

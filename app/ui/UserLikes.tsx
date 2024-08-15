@@ -1,5 +1,6 @@
 "use client";
 import React from "react";
+import { Badge } from "@nextui-org/react";
 import {
   Modal,
   ModalContent,
@@ -15,11 +16,12 @@ export default function UserLikes({ data }: { data: string[] }) {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   return (
     <>
-      <FaRegHeart
-        onClick={onOpen}
-        className="text-2xl cursor-pointer hover:text-red-500"
-      />
-
+      <Badge content={0}>
+        <FaRegHeart
+          onClick={onOpen}
+          className="text-2xl cursor-pointer hover:text-red-500"
+        />
+      </Badge>
       <Modal isOpen={isOpen} onOpenChange={onOpenChange}>
         <ModalContent>
           {(onClose) => (
