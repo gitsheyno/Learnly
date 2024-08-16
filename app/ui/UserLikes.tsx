@@ -92,7 +92,7 @@ export default function UserLikes({ data }: { data: TutorCard[] }) {
                       No favorite tutors here yet
                     </p>
                     <p>
-                      Browse and favorite tutors on the "Find tutors" page. View
+                      Browse and favorite tutors on the &quot;Find tutors&quot; page. View
                       and book your favorites here anytime.
                     </p>
                   </div>
