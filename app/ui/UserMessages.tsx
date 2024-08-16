@@ -19,7 +19,6 @@ type Message = {
 };
 import { MdOutlineMessage } from "react-icons/md";
 export default function UserMessages({ data }: { data: Message[] }) {
-  console.log("fata", data);
 
   const handleClick = async () => {
     onOpen();

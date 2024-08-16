@@ -16,6 +16,7 @@ const colors = [
 ];
 
 type TutorCard = {
+  id: string;
   category?: string;
   image: string;
   name: string;

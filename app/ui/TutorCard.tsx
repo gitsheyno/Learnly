@@ -6,8 +6,10 @@ import SendMessageModal from "./SendMessageModal";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 import { FaRegHeart } from "react-icons/fa";
+import { addFavoriteTutor } from "@/actions/addFavoriteTutor";
 
 type TutorCard = {
+  id: string;
   image: string;
   name: string;
   language: string;
@@ -37,7 +39,10 @@ export default function TutorCard({ item }: { item: TutorCard }) {
           <div className="flex justify-between w-full">
             <div className="flex  items-center gap-4">
               <h3 className="font-bold text-xl">{item.name} 🏴󠁧󠁢󠁥󠁮󠁧󠁿</h3>
-              <FaRegHeart className="hover:text-red-500 cursor-pointer" />
+              <FaRegHeart
+                onClick={() => addFavoriteTutor(item.id)}
+                className="hover:text-red-500 cursor-pointer"
+              />
             </div>
             <div className="flex flex-col items-center">
               <p className="font-bold">{item.cost} €</p>

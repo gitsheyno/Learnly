@@ -10,7 +10,5 @@ type Message = {
 export default async function page() {
   const user = await getCurrentUser();
   const messages: Message[] = await getMessages(user?.id as string);
-  console.log("message", messages);
-  const favoriteTutors: Message[] = [];
   return <>{user ? <UserMessages data={messages} /> : null}</>;
 }
