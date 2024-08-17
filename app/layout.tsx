@@ -33,14 +33,14 @@ export default function RootLayout({
         <NextUIProvider>
           <Nav />
           <RootLayoutComponents
-  infos={infos}
-  categories={categories}
-  tutorslider={tutorslider}
-  guides={guides}
-  becomeTutor={becomeTutor}
->
-  {children}
-</RootLayoutComponents>
+            infos={infos}
+            categories={categories}
+            tutorslider={tutorslider}
+            guides={guides}
+            becomeTutor={becomeTutor}
+          >
+            {children}
+          </RootLayoutComponents>
           <Footer />
         </NextUIProvider>
       </body>

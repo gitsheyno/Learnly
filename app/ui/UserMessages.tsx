@@ -18,7 +18,6 @@ type Message = {
 };
 import { MdOutlineMessage } from "react-icons/md";
 export default function UserMessages({ data }: { data: Message[] }) {
-
   const handleClick = async () => {
     onOpen();
     await changeMessageStatus();
@@ -51,8 +50,11 @@ export default function UserMessages({ data }: { data: Message[] }) {
               <ModalBody className="px-4 py-8">
                 {data.length ? (
                   <>
-                    {data.map((item,index) => (
-                      <div key={index} className="flex  gap-6 mb-4 items-center">
+                    {data.map((item, index) => (
+                      <div
+                        key={index}
+                        className="flex  gap-6 mb-4 items-center"
+                      >
                         <Avatar
                           src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=1528&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
                           size="sm"

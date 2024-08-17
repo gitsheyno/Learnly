@@ -50,41 +50,42 @@ export default function UserLikes({ data }: { data: TutorCard[] }) {
               <ModalBody>
                 {data.length ? (
                   <>
-                    
-                      <div className="mt-6">
-                        <Listbox
-                          classNames={{
-                            base: "max-w-xs",
-                            list: "max-h-[300px] overflow-scroll",
-                          }}
-                          items={data}
-                          label="Assigned to"
-                          selectionMode="multiple"
-                          variant="flat"
-                        >
-                          {(item) => (
-                            <ListboxItem key={item.tutorId} textValue={item.tutorName as string}>
-                              <div className="flex gap-2 items-center">
-                                <Avatar
-                                  alt={item.tutorName as string}
-                                  className="flex-shrink-0"
-                                  size="sm"
-                                  src={item.tutorImage as string}
-                                />
-                                <div className="flex flex-col">
-                                  <span className="text-small">
-                                    {item.tutorName}
-                                  </span>
-                                  <span className="text-tiny text-default-400">
-                                    {item.tutorCategory}
-                                  </span>
-                                </div>
+                    <div className="mt-6">
+                      <Listbox
+                        classNames={{
+                          base: "max-w-xs",
+                          list: "max-h-[300px] overflow-scroll",
+                        }}
+                        items={data}
+                        label="Assigned to"
+                        selectionMode="multiple"
+                        variant="flat"
+                      >
+                        {(item) => (
+                          <ListboxItem
+                            key={item.tutorId}
+                            textValue={item.tutorName as string}
+                          >
+                            <div className="flex gap-2 items-center">
+                              <Avatar
+                                alt={item.tutorName as string}
+                                className="flex-shrink-0"
+                                size="sm"
+                                src={item.tutorImage as string}
+                              />
+                              <div className="flex flex-col">
+                                <span className="text-small">
+                                  {item.tutorName}
+                                </span>
+                                <span className="text-tiny text-default-400">
+                                  {item.tutorCategory}
+                                </span>
                               </div>
-                            </ListboxItem>
-                          )}
-                        </Listbox>
-                      </div>
-                   
+                            </div>
+                          </ListboxItem>
+                        )}
+                      </Listbox>
+                    </div>
                   </>
                 ) : (
                   <div className="flex flex-col gap-4 justify-center items-center py-6">
@@ -92,8 +93,8 @@ export default function UserLikes({ data }: { data: TutorCard[] }) {
                       No favorite tutors here yet
                     </p>
                     <p>
-                      Browse and favorite tutors on the &quot;Find tutors&quot; page. View
-                      and book your favorites here anytime.
+                      Browse and favorite tutors on the &quot;Find tutors&quot;
+                      page. View and book your favorites here anytime.
                     </p>
                   </div>
                 )}

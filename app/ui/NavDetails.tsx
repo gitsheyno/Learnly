@@ -1,5 +1,6 @@
 "use client";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import {
   Navbar,
   NavbarBrand,
@@ -18,6 +19,7 @@ export default function NavDetail({
   isAuthenticated: boolean;
 }) {
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
+  const path = usePathname();
 
   const menuItems = [
     "Profile",
@@ -50,19 +52,21 @@ export default function NavDetail({
               </Link>
             </NavbarBrand>
           </NavbarContent>
-
+          {!isAuthenticated && 
           <NavbarContent className="hidden sm:flex gap-4" justify="center">
             <NavbarItem>
               <Link color="foreground" href="/tutors">
                 Find Tutors
               </Link>
             </NavbarItem>
+           
             <NavbarItem>
               <Link color="foreground" href="#" aria-current="page">
                 Become Tutors
               </Link>
             </NavbarItem>
           </NavbarContent>
+}
           <NavbarContent justify="end">
             {!isAuthenticated ? (
               <>

@@ -1,9 +1,8 @@
 import React from "react";
-
 import TutorList from "../ui/TutorList";
 import TutorFilter from "../ui/TutorFilter";
 
-export default async function tutors({
+export default async function page({
   searchParams,
 }: {
   searchParams?: {
@@ -11,7 +10,6 @@ export default async function tutors({
   };
 }) {
   const query = searchParams?.query || "";
-
   return (
     <section className="max-w-6xl px-6 text-center  mx-auto flex flex-col justify-between items-center ">
       <TutorFilter />
