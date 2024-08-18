@@ -6,6 +6,7 @@ import SendMessageModal from "./SendMessageModal";
 import Link from "next/link";
 import { FaRegHeart } from "react-icons/fa";
 import { addFavoriteTutor } from "@/actions/addFavoriteTutor";
+import clsx from "clsx";
 
 type TutorCard = {
   id: string;
@@ -23,9 +24,11 @@ type TutorCard = {
 export default function TutorCard({
   item,
   isAuthenticated,
+  fav,
 }: {
   item: TutorCard;
   isAuthenticated: undefined | string;
+  fav: boolean;
 }) {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
 
@@ -55,7 +58,10 @@ export default function TutorCard({
                 <>
                   <FaRegHeart
                     onClick={() => addFavoriteTutor(item.id)}
-                    className="hover:text-red-500 cursor-pointer"
+                    className={clsx(
+                      "hover:text-red-500 cursor-pointer",
+                      fav ? "text-red-500" : "text-black",
+                    )}
                   />
                 </>
               )}
