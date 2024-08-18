@@ -4,7 +4,6 @@ import Image from "next/image";
 import { Button, useDisclosure } from "@nextui-org/react";
 import SendMessageModal from "./SendMessageModal";
 import Link from "next/link";
-import { redirect } from "next/navigation";
 import { FaRegHeart } from "react-icons/fa";
 import { addFavoriteTutor } from "@/actions/addFavoriteTutor";
 
@@ -21,8 +20,21 @@ type TutorCard = {
   session: string;
 };
 
-export default function TutorCard({ item }: { item: TutorCard }) {
+export default function TutorCard({
+  item,
+  isAuthenticated,
+}: {
+  item: TutorCard;
+  isAuthenticated: undefined | string;
+}) {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
+
+  const handleNavigation = (tutorId: string) => {
+    const navigateTo = isAuthenticated ? `/dashboard/${tutorId}` : "/signin";
+
+    return navigateTo;
+  };
+
   return (
     <div>
       <div className="grid grid-cols-6 gap-4 p-8 border-1 border-black">
@@ -39,10 +51,14 @@ export default function TutorCard({ item }: { item: TutorCard }) {
           <div className="flex justify-between w-full">
             <div className="flex  items-center gap-4">
               <h3 className="font-bold text-xl">{item.name} 🏴󠁧󠁢󠁥󠁮󠁧󠁿</h3>
-              <FaRegHeart
-                onClick={() => addFavoriteTutor(item.id)}
-                className="hover:text-red-500 cursor-pointer"
-              />
+              {isAuthenticated && (
+                <>
+                  <FaRegHeart
+                    onClick={() => addFavoriteTutor(item.id)}
+                    className="hover:text-red-500 cursor-pointer"
+                  />
+                </>
+              )}
             </div>
             <div className="flex flex-col items-center">
               <p className="font-bold">{item.cost} €</p>
@@ -60,17 +76,19 @@ export default function TutorCard({ item }: { item: TutorCard }) {
         </div>
 
         <div className="col-start-2 col-span-3 flex flex-col items-start"></div>
-        <div className=" col-start-5 col-span-2 flex flex-col items-start row-start-1 row-span-1 gap-4 justify-center">
+        <div className="col-start-5 col-span-2 flex flex-col items-start row-start-1 row-span-1 gap-4 justify-end">
+          <SendMessageModal isOpen={isOpen} onOpenChange={onOpenChange} />
+          {isAuthenticated && (
+            <Button onClick={onOpen} className="w-full border-1 bg-white ">
+              Send a Message
+            </Button>
+          )}
           <Button
             as={Link}
-            href={`/dashboard/${1}`}
+            href={handleNavigation(item.id)}
             className="w-full bg-pink-400 border-1 border-black"
           >
             Book a lesson
-          </Button>
-          <SendMessageModal isOpen={isOpen} onOpenChange={onOpenChange} />
-          <Button onClick={onOpen} className="w-full border-1 bg-white ">
-            Send a Message
           </Button>
         </div>
       </div>

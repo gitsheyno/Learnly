@@ -11,6 +11,7 @@ import {
   NavbarMenuItem,
   Button,
 } from "@nextui-org/react";
+import { signout } from "@/actions/signout";
 import { useState } from "react";
 import { AcmeLogo } from "./Logo";
 export default function NavDetail({
@@ -52,21 +53,21 @@ export default function NavDetail({
               </Link>
             </NavbarBrand>
           </NavbarContent>
-          {!isAuthenticated && 
-          <NavbarContent className="hidden sm:flex gap-4" justify="center">
-            <NavbarItem>
-              <Link color="foreground" href="/tutors">
-                Find Tutors
-              </Link>
-            </NavbarItem>
-           
-            <NavbarItem>
-              <Link color="foreground" href="#" aria-current="page">
-                Become Tutors
-              </Link>
-            </NavbarItem>
-          </NavbarContent>
-}
+          {!isAuthenticated && (
+            <NavbarContent className="hidden sm:flex gap-4" justify="center">
+              <NavbarItem>
+                <Link color="foreground" href="/tutors">
+                  Find Tutors
+                </Link>
+              </NavbarItem>
+
+              <NavbarItem>
+                <Link color="foreground" href="#" aria-current="page">
+                  Become Tutors
+                </Link>
+              </NavbarItem>
+            </NavbarContent>
+          )}
           <NavbarContent justify="end">
             {!isAuthenticated ? (
               <>
@@ -88,7 +89,12 @@ export default function NavDetail({
               </>
             ) : (
               <NavbarItem>
-                <Button as={Link} color="default" href="/" variant="flat">
+                <Button
+                  type="button"
+                  onClick={() => signout()}
+                  color="default"
+                  variant="flat"
+                >
                   Sign out
                 </Button>
               </NavbarItem>

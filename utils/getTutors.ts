@@ -1,7 +1,7 @@
 import "server-only";
-import { and, desc, eq, inArray } from "drizzle-orm";
+import { eq  } from "drizzle-orm";
 import { db } from "@/db/db";
-import { messages, userFavorites } from "@/db/schema";
+import {  userFavorites } from "@/db/schema";
 import { memoize } from "nextjs-better-unstable-cache";
 import { tutors } from "@/db/schema";
 
@@ -17,7 +17,6 @@ export const getOneTutor = async (tutorId: string) => {
   const requestedTutors = await db.query.tutors.findFirst({
     where: eq(tutors.id, tutorId),
   });
-
   return requestedTutors;
 };
 

@@ -1,7 +1,6 @@
 import React from "react";
 import BredCrumbs from "./BredCrumbs";
-import { Button } from "@nextui-org/react";
-import Image from "next/image";
+import { getCurrentUser } from "@/utils/users";
 import AccordionComponent from "./Accardion";
 import TutorCard from "./TutorCard";
 import { getTutors } from "@/utils/getTutors";
@@ -32,13 +31,16 @@ type TutorCard = {
 //TODO implement the favorite tutors
 
 export default async function TutorList({ query }: { query: string }) {
+  const user = await getCurrentUser();
   const tutors: TutorCard[] = await getTutors(query);
   const filteredData = tutors.filter((item) => item.category === query);
+  console.log("tutors", tutors);
+
   return (
     <section className="max-w-full px-6 text-center my-24 mx-auto flex flex-col justify-between items-center">
       <div className="flex flex-col gap-6 mb-6">
         {filteredData.map((item, index) => (
-          <TutorCard key={index} item={item} />
+          <TutorCard key={index} item={item} isAuthenticated={user?.id} />
         ))}
       </div>
 

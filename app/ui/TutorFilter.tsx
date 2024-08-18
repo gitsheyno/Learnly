@@ -4,10 +4,9 @@ import { useEffect } from "react";
 import { Button } from "@nextui-org/react";
 import Link from "next/link";
 import Image from "next/image";
-import React, { useTransition } from "react";
+import React from "react";
 import { usePathname, useSearchParams, useRouter } from "next/navigation";
 import clsx from "clsx";
-import { useDebouncedCallback } from "use-debounce";
 const data = [
   "English",
   "German",
@@ -36,11 +35,12 @@ export default function TutorFilter() {
 
   useEffect(() => {
     const params = new URLSearchParams(searchParams);
+    console.log("clicked");
     params.set("query", "English");
     replace(`${pathname}?${params.toString()}`);
-  }, []);
+  }, [pathname]);
 
-  const handleSearch = useDebouncedCallback((term: string) => {
+  const handleSearch = (term: string) => {
     const params = new URLSearchParams(searchParams);
 
     if (term) {
@@ -50,7 +50,7 @@ export default function TutorFilter() {
     }
 
     replace(`${pathname}?${params.toString()}`, { scroll: false });
-  }, 300);
+  };
 
   const isActive = (route: string) => {
     const params = new URLSearchParams(searchParams);

@@ -1,6 +1,7 @@
 import React from "react";
 import Booking from "@/app/ui/Booking";
 import { getCurrentUser } from "@/utils/users";
+import { getOneTutor } from "@/utils/getTutors";
 
 type TutorCard = {
   category?: string;
@@ -25,25 +26,11 @@ export default async function BookingPage({
   params: { id: string };
 }) {
   const user = await getCurrentUser();
-  const data: TutorCard = {
-    image:
-      "https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=1528&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    name: "Sophia",
-    language: "German",
-    category: "German",
-    students: "98 active students",
-    lessons: "10,400 lessons",
-    speakLang: "Speaks German (Native), French (Intermediate)",
-    benefit: "Expert in teaching German to beginners",
-    cost: "39",
-    session: "60-min lesson",
-  };
-
-  //TODO fetch the data from db
+  const tutor: TutorCard | undefined = await getOneTutor(params.id);
 
   return (
     <div>
-      <Booking data={data} id={params.id} user={user as User} />
+      <Booking data={tutor} id={params.id} user={user as User} />
     </div>
   );
 }
