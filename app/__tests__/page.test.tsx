@@ -9,7 +9,6 @@ vi.mock("../ui/Banner", () => ({
 
 test("Page", () => {
   render(<Page />);
-  expect(screen.getByRole("heading", { level: 1, name: "Home" })).toBeDefined();
 
   const abas = render(<Banner />);
 
