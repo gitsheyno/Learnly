@@ -5,7 +5,6 @@ import AccordionComponent from "./Accardion";
 import TutorCard from "./TutorCard";
 import { getTutors } from "@/utils/getTutors";
 import { getFavoriteTutor } from "@/utils/getTutors";
-
 type TutorCard = {
   id: string;
   category?: string;

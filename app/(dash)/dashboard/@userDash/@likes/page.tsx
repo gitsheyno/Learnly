@@ -23,7 +23,5 @@ export default async function page() {
     user?.id as string,
   );
 
-  // const favoriteTutors: FavoriteTutor[] = [];
-
   return <>{user ? <UserLikes data={favoriteTutors} /> : null}</>;
 }
