@@ -3,7 +3,7 @@ import BredCrumbs from "component/BredCrumbs";
 import AccordionComponent from "component/Accardion";
 import Image from "next/image";
 import { Button, Link } from "@nextui-org/react";
-import BecomeTutor from "../ui/BecomeTutor";
+import BecomeTutor from "component/BecomeTutor";
 import { Card, CardBody } from "@nextui-org/react";
 const breData = [
   {

@@ -4,7 +4,7 @@ import { db } from "@/db/db";
 import { userFavorites } from "@/db/schema";
 import { memoize } from "nextjs-better-unstable-cache";
 import { tutors } from "@/db/schema";
-import { delay } from "./delay";
+import { delay } from "./index";
 export const getTutors = async (query: string) => {
   console.log("fetch");
   await delay();

@@ -1,6 +1,6 @@
 import React from "react";
 import { BsCashStack } from "react-icons/bs";
-import { getCurrentUser } from "@/utils/users";
+import { getCurrentUser } from "@/utils/index";
 export default async function page() {
   const user = await getCurrentUser();
   return (
