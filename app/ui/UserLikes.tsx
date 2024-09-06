@@ -55,8 +55,8 @@ export default function UserLikes({ data }: { data: TutorCard[] }) {
                   <>
                     <div className="mt-6  py-2">
                       <div className=" flex flex-col gap-2">
-                        {data.map((item) => (
-                          <div className=" border-1  flex gap-2 justify-between pl-2 items-center">
+                        {data.map((item,index) => (
+                          <div key={index} className=" border-1  flex gap-2 justify-between pl-2 items-center">
                             <div
                               className="flex items-center gap-2"
                               key={item.tutorId}
