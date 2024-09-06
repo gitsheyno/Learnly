@@ -1,5 +1,5 @@
 import React from "react";
-import UserLikes from "@/app/ui/UserLikes";
+import UserLikes from "component/UserLikes";
 import { getCurrentUser } from "@/utils/users";
 import { getFavoriteTutor } from "@/utils/getTutors";
 

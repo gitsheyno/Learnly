@@ -1,5 +1,5 @@
 import React from "react";
-import UserHelp from "@/app/ui/UserHelp";
+import UserHelp from "component/UserHelp";
 import { getCurrentUser } from "@/utils/users";
 
 export default async function Page() {

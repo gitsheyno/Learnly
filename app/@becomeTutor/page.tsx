@@ -1,5 +1,5 @@
 import React from "react";
-import BecomeTutor from "../ui/BecomeTutor";
+import BecomeTutor from "component/BecomeTutor";
 export default function page() {
   return <BecomeTutor />;
 }

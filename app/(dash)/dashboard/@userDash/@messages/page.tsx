@@ -1,5 +1,5 @@
 import React from "react";
-import UserMessages from "@/app/ui/UserMessages";
+import UserMessages from "component/UserMessages";
 import { getCurrentUser } from "@/utils/users";
 import { getMessages } from "@/utils/messages";
 

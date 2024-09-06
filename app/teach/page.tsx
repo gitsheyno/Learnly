@@ -1,6 +1,6 @@
 import React from "react";
-import BredCrumbs from "../ui/BredCrumbs";
-import AccordionComponent from "../ui/Accardion";
+import BredCrumbs from "component/BredCrumbs";
+import AccordionComponent from "component/Accardion";
 import Image from "next/image";
 import { Button, Link } from "@nextui-org/react";
 import BecomeTutor from "../ui/BecomeTutor";

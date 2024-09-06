@@ -1,5 +1,5 @@
 import React from "react";
-import Categories from "../ui/Categories";
+import Categories from "component/Categories";
 export default function page() {
   return <Categories />;
 }

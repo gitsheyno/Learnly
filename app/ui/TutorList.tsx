@@ -1,8 +1,8 @@
 import React from "react";
-import BredCrumbs from "./BredCrumbs";
+import BredCrumbs from "component/BredCrumbs";
 import { getCurrentUser } from "@/utils/users";
-import AccordionComponent from "./Accardion";
-import TutorCard from "./TutorCard";
+import AccordionComponent from "component/Accardion";
+import TutorCard from "component/TutorCard";
 import { getTutors } from "@/utils/getTutors";
 import { getFavoriteTutor } from "@/utils/getTutors";
 type TutorCard = {

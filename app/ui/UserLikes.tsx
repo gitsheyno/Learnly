@@ -11,8 +11,9 @@ import {
 } from "@nextui-org/react";
 import { FaRegHeart } from "react-icons/fa";
 import { FaArrowCircleRight } from "react-icons/fa";
-import { CiCircleRemove } from "react-icons/ci";
-import {  Avatar } from "@nextui-org/react";
+import { MdOutlineDeleteOutline } from "react-icons/md";
+import { Avatar } from "@nextui-org/react";
+import { addFavoriteTutor } from "@/actions/addFavoriteTutor";
 
 type TutorCard = {
   tutorId: string;
@@ -52,11 +53,14 @@ export default function UserLikes({ data }: { data: TutorCard[] }) {
               <ModalBody>
                 {data.length ? (
                   <>
-                    <div className="mt-6">
+                    <div className="mt-6  py-2">
                       <div className=" flex flex-col gap-2">
-                        {data.map((item, index) => (
+                        {data.map((item) => (
                           <div className=" border-1  flex gap-2 justify-between pl-2 items-center">
-                            <div className="flex items-center gap-2">
+                            <div
+                              className="flex items-center gap-2"
+                              key={item.tutorId}
+                            >
                               <Avatar
                                 alt={item.tutorName as string}
                                 className="flex-shrink-0"
@@ -73,11 +77,18 @@ export default function UserLikes({ data }: { data: TutorCard[] }) {
                               </div>
                             </div>
                             <div className="flex flex-col">
-                              <div className="border-l-1 border-b-1 flex-1  p-2 flex items-center justify-center hover:bg-gray-500 hover:text-white cursor-pointer">
-                                <FaArrowCircleRight className="text-xl " />
+                              <div className="border-l-1 border-b-1 flex-1  py-3 px-3 flex items-center justify-center hover:bg-gray-500 hover:text-white cursor-pointer">
+                                <FaArrowCircleRight
+                                  className="text-xl "
+                                  tabIndex={0}
+                                />
                               </div>
-                              <div className="border-l-1 flex-1 py-2 px-3 hover:bg-gray-500 hover:text-white cursor-pointer">
-                                <CiCircleRemove className="text-2xl" />
+                              <div className="border-l-1 flex-1 py-3 px-3 hover:bg-gray-500 hover:text-white cursor-pointer">
+                                <MdOutlineDeleteOutline
+                                  tabIndex={0}
+                                  onClick={() => addFavoriteTutor(item.tutorId)}
+                                  className="text-xl"
+                                />
                               </div>
                             </div>
                           </div>
