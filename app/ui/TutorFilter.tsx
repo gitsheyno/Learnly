@@ -10,6 +10,9 @@ import clsx from "clsx";
 import LanguageSelect from "component/filters/LanguageSelect";
 import PriceSelect from "component/filters/PriceSelect";
 import Search from "component/filters/Search";
+import { Select, SelectItem, SelectedItems } from "@nextui-org/react";
+import { filterLanguage } from "@/actions/filters";
+
 const data = [
   "English",
   "German",
@@ -19,6 +22,18 @@ const data = [
   "Japanese",
   "Spanish",
 ];
+
+export const animals = [
+  { key: "cat", label: "popularity" },
+  { key: "dog", label: "highest fee" },
+  { key: "elephant", label: "lowest fee" },
+  { key: "lion", label: "native speaker" },
+];
+
+type Animals = {
+  key: string;
+  label: string;
+};
 
 const links = [
   { route: "/dashboard", name: "Home" },
@@ -102,11 +117,24 @@ export default function TutorFilter() {
           />
         </div>
       </div>
-      <form action="">
+      <form action="filterLanguage">
         <div className="flex flex-col gap-2">
           <div className="flex flex-col md:flex-row gap-2 items-center justify-center mt-20">
             <div className="flex-[1]   flex justify-end">
-              <LanguageSelect />
+              <Select
+                items={animals}
+                name="language"
+                onSelectionChange={(key) => console.log(key.currentKey)}
+                label="I want to sort by : "
+                classNames={{
+                  trigger: "bg-transparent py-7 border-1 border-black",
+                }}
+                className="w-[400px] md:max-w-[300px]"
+              >
+                {(animal) => (
+                  <SelectItem key={animal.label}>{animal.label}</SelectItem>
+                )}
+              </Select>
             </div>
             <div className="flex-[1]   flex justify-start">
               <PriceSelect />

@@ -5,6 +5,7 @@ export default function Search() {
     <Input
       type="text"
       label="Search"
+      name=""
       className=" w-[400px] md:w-[600px]"
       classNames={{ inputWrapper: ["bg-transparent border-1 border-black"] }}
     />
