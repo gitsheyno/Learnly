@@ -21,7 +21,10 @@ export default function LanguageSelect() {
       items={animals}
       label="I want to learn"
       placeholder="Select a language"
-      className="max-w-[200px]"
+      classNames={{
+        trigger: "bg-transparent py-7 border-1 border-black",
+      }}
+      className="w-[400px] md:max-w-[300px]"
     >
       {(animal) => <SelectItem key={animal.label}>{animal.label}</SelectItem>}
     </Select>

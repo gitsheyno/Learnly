@@ -9,6 +9,7 @@ import { usePathname, useSearchParams, useRouter } from "next/navigation";
 import clsx from "clsx";
 import LanguageSelect from "component/filters/LanguageSelect";
 import PriceSelect from "component/filters/PriceSelect";
+import Search from "component/filters/Search";
 const data = [
   "English",
   "German",
@@ -101,19 +102,22 @@ export default function TutorFilter() {
           />
         </div>
       </div>
-                  <form action="">
-      <div className="flex gap-2 items-center justify-center mt-8">
-        
-        <div className="flex-1   flex justify-end">
-          <LanguageSelect />
+      <form action="">
+        <div className="flex flex-col gap-2">
+          <div className="flex flex-col md:flex-row gap-2 items-center justify-center mt-20">
+            <div className="flex-[1]   flex justify-end">
+              <LanguageSelect />
+            </div>
+            <div className="flex-[1]   flex justify-start">
+              <PriceSelect />
+            </div>
+          </div>
+          <div>
+            <div className="flex-[2] flex justify-center">
+              <Search />
+            </div>
+          </div>
         </div>
-        <div className="flex-1">
-          <input className="border-1 w-full" placeholder="search..."/>
-        </div>
-        <div className="flex-1   flex justify-start">
-          <PriceSelect />
-        </div>
-      </div>
       </form>
     </div>
   );
