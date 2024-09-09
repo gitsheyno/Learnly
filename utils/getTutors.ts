@@ -4,10 +4,15 @@ import { db } from "@/db/db";
 import { userFavorites } from "@/db/schema";
 import { memoize } from "nextjs-better-unstable-cache";
 import { tutors } from "@/db/schema";
-import { delay } from "./index";
-export const getTutors = async (query: string) => {
-  console.log("fetch");
-  await delay();
+
+export const getTutors = async (query: string, name: string) => {
+  if (name) {
+    const allTutors = await db.query.tutors.findMany();
+
+    const filteredTutors = allTutors.filter((tutor)=>tutor.name.includes(name))
+
+    return filteredTutors;
+  }
   const requestedTutors = await db.query.tutors.findMany({
     where: eq(tutors.category, query),
   });

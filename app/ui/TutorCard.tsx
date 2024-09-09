@@ -40,7 +40,7 @@ export default function TutorCard({
 
   return (
     <div>
-      <div className="grid grid-cols-6 gap-4 p-8 border-1 border-black">
+      <div className="grid grid-cols-6 gap-4 p-8 rounded-md border-1 border-black">
         <div className="col-start-1 col-span-1">
           <Image
             src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=1528&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"

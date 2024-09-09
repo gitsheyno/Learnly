@@ -33,12 +33,19 @@ type FavTutorCard = {
   tutorSession: string | null;
 };
 
-export default async function TutorList({ query }: { query: string }) {
+export default async function TutorList({
+  query,
+  name,
+}: {
+  query: string;
+  name: string;
+}) {
   const user = await getCurrentUser();
-  const tutors: TutorCard[] = await getTutors(query);
+  const tutors: TutorCard[] = await getTutors(query, name);
   const favoriteTutors: FavTutorCard[] = await getFavoriteTutor(
     user?.id as string,
   );
+  console.log(name);
   const filteredData = tutors.filter((item) => item.category === query);
 
   const isFavorite = (item: TutorCard) => {

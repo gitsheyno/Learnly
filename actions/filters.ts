@@ -1,5 +1,5 @@
 "use server";
 
-export const filterLanguage = async (formData: FormData) => {
+export const filterLanguage = async (formData: string) => {
   console.log("clicked");
 };

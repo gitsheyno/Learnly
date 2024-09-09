@@ -29,7 +29,7 @@ export default function PriceSelect() {
       //   classNames={{ base: ["w-[200px]"] }}
     >
       <PopoverTrigger>
-        <Button className="w-[400px] md:w-[300px] py-7 bg-transparent border-1 border-black">
+        <Button className="text-gray-500 w-[400px] md:w-[300px] py-7 bg-transparent border-1 border-black">
           Price per lesson
         </Button>
       </PopoverTrigger>

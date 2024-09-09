@@ -122,9 +122,13 @@ export default function TutorFilter() {
           <div className="flex flex-col md:flex-row gap-2 items-center justify-center mt-20">
             <div className="flex-[1]   flex justify-end">
               <Select
+                defaultSelectedKeys={[animals[0].label]}
+                selectionMode="single"
                 items={animals}
                 name="language"
-                onSelectionChange={(key) => console.log(key.currentKey)}
+                onSelectionChange={(key) =>
+                  filterLanguage(key.currentKey as string)
+                }
                 label="I want to sort by : "
                 classNames={{
                   trigger: "bg-transparent py-7 border-1 border-black",
@@ -136,7 +140,7 @@ export default function TutorFilter() {
                 )}
               </Select>
             </div>
-            <div className="flex-[1]   flex justify-start">
+            <div className="flex-[1] flex justify-start">
               <PriceSelect />
             </div>
           </div>
