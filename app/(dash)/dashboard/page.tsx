@@ -9,15 +9,31 @@ export default async function page({
   searchParams?: {
     query?: string;
     name?: string;
+    sortBy?: string;
+    min?: number;
+    max?: number;
   };
 }) {
   const query = searchParams?.query || "English";
   const name = searchParams?.name || "";
+  const sortBy = searchParams?.sortBy || "";
+  const min = searchParams?.min || 0;
+  const max = searchParams?.max || 50;
+
   return (
     <div className="max-w-6xl px-6  text-center  mx-auto flex flex-col justify-between items-center ">
       <TutorFilter />
-      <Suspense key={query + name} fallback={<SkeletonUI />}>
-        <TutorList query={query} name={name} />
+      <Suspense
+        key={query + name + sortBy + min + max}
+        fallback={<SkeletonUI />}
+      >
+        <TutorList
+          query={query}
+          name={name}
+          sortBy={sortBy}
+          min={min}
+          max={max}
+        />
       </Suspense>
     </div>
   );

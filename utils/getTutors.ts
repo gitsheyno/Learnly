@@ -5,11 +5,53 @@ import { userFavorites } from "@/db/schema";
 import { memoize } from "nextjs-better-unstable-cache";
 import { tutors } from "@/db/schema";
 
-export const getTutors = async (query: string, name: string) => {
+export const getTutors = async (
+  query: string,
+  name: string,
+  sortBy: string,
+  ...price: number[]
+) => {
+  if (price) {
+    const allTutors = await db.query.tutors.findMany();
+    const [min, max] = price;
+
+    const filteredTutors = allTutors.filter((tutor) => {
+      const cost = tutor.cost as unknown as number;
+
+      return cost >= min && cost <= max;
+    });
+
+    return filteredTutors;
+  }
+
+  if (sortBy) {
+    const allTutors = await db.query.tutors.findMany();
+
+    if (sortBy === "highest") {
+      allTutors.sort((a, b) => {
+        const costA = a.cost as unknown as number;
+        const costB = b.cost as unknown as number;
+        return costB - costA;
+      });
+
+      return allTutors;
+    } else if (sortBy === "lowest") {
+      allTutors.sort((a, b) => {
+        const costA = a.cost as unknown as number;
+        const costB = b.cost as unknown as number;
+        return costA - costB;
+      });
+
+      return allTutors;
+    }
+  }
+
   if (name) {
     const allTutors = await db.query.tutors.findMany();
 
-    const filteredTutors = allTutors.filter((tutor)=>tutor.name.includes(name))
+    const filteredTutors = allTutors.filter((tutor) =>
+      tutor.name.includes(name),
+    );
 
     return filteredTutors;
   }

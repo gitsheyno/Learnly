@@ -23,11 +23,11 @@ const data = [
   "Spanish",
 ];
 
-export const animals = [
-  { key: "cat", label: "popularity" },
-  { key: "dog", label: "highest fee" },
-  { key: "elephant", label: "lowest fee" },
-  { key: "lion", label: "native speaker" },
+export const sort = [
+  { key: "popularity", label: "popularity" },
+  { key: "highest", label: "highest" },
+  { key: "lowest", label: "lowest" },
+  { key: "native", label: "native" },
 ];
 
 type Animals = {
@@ -53,10 +53,11 @@ export default function TutorFilter() {
 
   useEffect(() => {
     const params = new URLSearchParams(searchParams);
-    console.log("clicked");
     params.set("query", "English");
     replace(`${pathname}?${params.toString()}`);
   }, [pathname]);
+
+  //TODO add custom hook
 
   const handleSearch = (term: string) => {
     const params = new URLSearchParams(searchParams);
@@ -70,11 +71,34 @@ export default function TutorFilter() {
     replace(`${pathname}?${params.toString()}`, { scroll: false });
   };
 
+  const handleSort = (item: string) => {
+    const params = new URLSearchParams(searchParams);
+
+    if (item) {
+      params.set("sortBy", item);
+    } else {
+      params.delete("sortBy");
+    }
+
+    replace(`${pathname}?${params.toString()}`, { scroll: false });
+  };
+
   const isActive = (route: string) => {
     const params = new URLSearchParams(searchParams);
 
     const val = params.get("query");
     return val ? `/dashboard/${params.get("query")}` : `/dashboard/English`;
+  };
+
+  const handleResetFilter = () => {
+    const params = new URLSearchParams(searchParams);
+
+    params.delete("sortBy");
+    params.delete("name");
+    params.delete("min");
+    params.delete("max");
+
+    replace(`${pathname}?${params.toString()}`, { scroll: false });
   };
   return (
     <div>
@@ -117,40 +141,40 @@ export default function TutorFilter() {
           />
         </div>
       </div>
-      <form action="filterLanguage">
-        <div className="flex flex-col gap-2">
-          <div className="flex flex-col md:flex-row gap-2 items-center justify-center mt-20">
-            <div className="flex-[1]   flex justify-end">
-              <Select
-                defaultSelectedKeys={[animals[0].label]}
-                selectionMode="single"
-                items={animals}
-                name="language"
-                onSelectionChange={(key) =>
-                  filterLanguage(key.currentKey as string)
-                }
-                label="I want to sort by : "
-                classNames={{
-                  trigger: "bg-transparent py-7 border-1 border-black",
-                }}
-                className="w-[400px] md:max-w-[300px]"
-              >
-                {(animal) => (
-                  <SelectItem key={animal.label}>{animal.label}</SelectItem>
-                )}
-              </Select>
-            </div>
-            <div className="flex-[1] flex justify-start">
-              <PriceSelect />
-            </div>
+
+      <div className="flex flex-col gap-2">
+        <div className="flex flex-col md:flex-row gap-2 items-center justify-center mt-20">
+          <div className="flex-[2]   flex justify-end">
+            <Select
+              defaultSelectedKeys={[
+                searchParams.get("name")?.toString() as string,
+              ]}
+              selectionMode="single"
+              items={sort}
+              name="language"
+              onSelectionChange={(key) => handleSort(key.currentKey as string)}
+              label="I want to sort by : "
+              classNames={{
+                trigger: "bg-transparent py-7 border-1 border-black",
+              }}
+              className="w-[400px] md:max-w-[300px]"
+            >
+              {(sort) => <SelectItem key={sort.label}>{sort.label}</SelectItem>}
+            </Select>
           </div>
-          <div>
-            <div className="flex-[2] flex justify-center">
-              <Search />
+          <div className="flex-[2] flex justify-start items-center gap-4">
+            <PriceSelect />
+            <div>
+              <Button onClick={handleResetFilter}>Clear Filter</Button>
             </div>
           </div>
         </div>
-      </form>
+        <div>
+          <div className="flex-[4] flex justify-center">
+            <Search />
+          </div>
+        </div>
+      </div>
     </div>
   );
 }

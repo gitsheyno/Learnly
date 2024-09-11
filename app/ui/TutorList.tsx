@@ -36,12 +36,18 @@ type FavTutorCard = {
 export default async function TutorList({
   query,
   name,
+  sortBy,
+  min,
+  max,
 }: {
   query: string;
   name: string;
+  sortBy: string;
+  min: number;
+  max: number;
 }) {
   const user = await getCurrentUser();
-  const tutors: TutorCard[] = await getTutors(query, name);
+  const tutors: TutorCard[] = await getTutors(query, name, sortBy, min, max);
   const favoriteTutors: FavTutorCard[] = await getFavoriteTutor(
     user?.id as string,
   );
