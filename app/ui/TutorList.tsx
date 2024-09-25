@@ -33,26 +33,37 @@ type FavTutorCard = {
   tutorSession: string | null;
 };
 
-export default async function TutorList({
-  query,
-  name,
-  sortBy,
-  min,
-  max,
-}: {
+type SearchParams = {
   query: string;
   name: string;
   sortBy: string;
-  min: number;
-  max: number;
+  min: string;
+  max: string;
+  page: number;
+};
+
+export default async function TutorList({
+  queryObj,
+}: {
+  queryObj: SearchParams;
 }) {
+  const queryOBJ = { ...queryObj };
+  const queryFields = ["query", "sortBy", "page"];
+
+  queryFields.forEach((el) => {
+    if (el) {
+      return delete (queryOBJ as { [key: string]: string | number })[el];
+    }
+  });
+
   const user = await getCurrentUser();
-  const tutors: TutorCard[] = await getTutors(query, name, sortBy, min, max);
+  const tutors: TutorCard[] = await getTutors(queryOBJ);
   const favoriteTutors: FavTutorCard[] = await getFavoriteTutor(
     user?.id as string,
   );
-  console.log(name);
-  const filteredData = tutors.filter((item) => item.category === query);
+  const filteredData = tutors.filter(
+    (item) => item.category === queryObj.query,
+  );
 
   const isFavorite = (item: TutorCard) => {
     const res = favoriteTutors.filter((tutor) => {

@@ -1,65 +1,48 @@
 import "server-only";
-import { and, eq } from "drizzle-orm";
+import { and, eq, gte, lte, or } from "drizzle-orm";
 import { db } from "@/db/db";
 import { userFavorites } from "@/db/schema";
 import { memoize } from "nextjs-better-unstable-cache";
 import { tutors } from "@/db/schema";
 
+type SearchParams = {
+  query: string;
+  name: string;
+  sortBy: string;
+  min: string;
+  max: string;
+  page: number;
+};
+
 export const getTutors = async (
-  query: string,
-  name: string,
-  sortBy: string,
-  ...price: number[]
+  queryParams: SearchParams,
 ) => {
-  if (price) {
-    const allTutors = await db.query.tutors.findMany();
-    const [min, max] = price;
 
-    const filteredTutors = allTutors.filter((tutor) => {
-      const cost = tutor.cost as unknown as number;
 
-      return cost >= min && cost <= max;
-    });
 
-    return filteredTutors;
+  const conditions = [];
+
+  // Check for each filter and add it to the conditions array if it exists
+  if (queryParams.name) {
+    conditions.push(eq(tutors.name, queryParams.name));
   }
 
-  if (sortBy) {
-    const allTutors = await db.query.tutors.findMany();
-
-    if (sortBy === "highest") {
-      allTutors.sort((a, b) => {
-        const costA = a.cost as unknown as number;
-        const costB = b.cost as unknown as number;
-        return costB - costA;
-      });
-
-      return allTutors;
-    } else if (sortBy === "lowest") {
-      allTutors.sort((a, b) => {
-        const costA = a.cost as unknown as number;
-        const costB = b.cost as unknown as number;
-        return costA - costB;
-      });
-
-      return allTutors;
-    }
+  if (queryParams.min !== undefined) {
+    conditions.push(gte(tutors.cost, queryParams.min));
   }
 
-  if (name) {
-    const allTutors = await db.query.tutors.findMany();
-
-    const filteredTutors = allTutors.filter((tutor) =>
-      tutor.name.includes(name),
-    );
-
-    return filteredTutors;
+  if (queryParams.max !== undefined) {
+    conditions.push(lte(tutors.cost, queryParams.max));
   }
-  const requestedTutors = await db.query.tutors.findMany({
-    where: eq(tutors.category, query),
+
+  // If no conditions are set, return all tutors
+  const allTutors = await db.query.tutors.findMany({
+    where: conditions.length > 0 ? and(...conditions) : undefined,
   });
 
-  return requestedTutors;
+  return allTutors;
+
+
 };
 
 export const getOneTutor = async (tutorId: string) => {

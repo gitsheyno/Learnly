@@ -3,16 +3,20 @@ import { Suspense } from "react";
 import TutorList from "component/TutorList";
 import TutorFilter from "component/TutorFilter";
 import SkeletonUI from "component/Skeleton";
+
+type SearchParams = {
+  query: string;
+  name: string;
+  sortBy: string;
+  min: string;
+  max: string;
+  page: number;
+};
+
 export default async function page({
   searchParams,
 }: {
-  searchParams?: {
-    query?: string;
-    name?: string;
-    sortBy?: string;
-    min?: number;
-    max?: number;
-  };
+  searchParams: SearchParams;
 }) {
   const query = searchParams?.query || "English";
   const name = searchParams?.name || "";
@@ -27,13 +31,7 @@ export default async function page({
         key={query + name + sortBy + min + max}
         fallback={<SkeletonUI />}
       >
-        <TutorList
-          query={query}
-          name={name}
-          sortBy={sortBy}
-          min={min}
-          max={max}
-        />
+        <TutorList queryObj={searchParams} />
       </Suspense>
     </div>
   );
