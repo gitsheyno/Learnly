@@ -5,6 +5,9 @@ import AccordionComponent from "component/Accardion";
 import TutorCard from "component/TutorCard";
 import { getTutors } from "@/utils/getTutors";
 import { getFavoriteTutor } from "@/utils/getTutors";
+
+//TODO move types
+
 type TutorCard = {
   id: string;
   category?: string;
@@ -47,17 +50,8 @@ export default async function TutorList({
 }: {
   queryObj: SearchParams;
 }) {
-  const queryOBJ = { ...queryObj };
-  const queryFields = ["query", "sortBy", "page"];
-
-  queryFields.forEach((el) => {
-    if (el) {
-      return delete (queryOBJ as { [key: string]: string | number })[el];
-    }
-  });
-
   const user = await getCurrentUser();
-  const tutors: TutorCard[] = await getTutors(queryOBJ);
+  const tutors: TutorCard[] = await getTutors(queryObj);
   const favoriteTutors: FavTutorCard[] = await getFavoriteTutor(
     user?.id as string,
   );

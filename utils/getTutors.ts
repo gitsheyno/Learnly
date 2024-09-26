@@ -1,5 +1,5 @@
 import "server-only";
-import { and, eq, gte, lte, or } from "drizzle-orm";
+import { and, eq, gte, lte, or,asc, desc } from "drizzle-orm";
 import { db } from "@/db/db";
 import { userFavorites } from "@/db/schema";
 import { memoize } from "nextjs-better-unstable-cache";
@@ -14,35 +14,53 @@ type SearchParams = {
   page: number;
 };
 
-export const getTutors = async (
-  queryParams: SearchParams,
-) => {
+export const getTutors = async (queryParams: SearchParams) => {
+  const { query, name, sortBy, min, max, page } = queryParams;
 
-
-
+  // Initialize conditions array for filtering
   const conditions = [];
 
-  // Check for each filter and add it to the conditions array if it exists
-  if (queryParams.name) {
-    conditions.push(eq(tutors.name, queryParams.name));
+  // Add filtering conditions based on provided parameters
+  if (name) {
+    conditions.push(eq(tutors.name, name));
   }
 
-  if (queryParams.min !== undefined) {
-    conditions.push(gte(tutors.cost, queryParams.min));
+  if (min !== undefined && min !== "") {
+    conditions.push(gte(tutors.cost, min));
   }
 
-  if (queryParams.max !== undefined) {
-    conditions.push(lte(tutors.cost, queryParams.max));
+  if (max !== undefined && max !== "") {
+    conditions.push(lte(tutors.cost,max));
   }
 
-  // If no conditions are set, return all tutors
-  const allTutors = await db.query.tutors.findMany({
+  // Define sorting options using a lookup table
+  const sortByOptions: { [key: string]: any } = {
+    highest: desc(tutors.cost),
+    lowest: asc(tutors.cost),
+    name: asc(tutors.name),
+  };
+
+  // Retrieve the corresponding sort option
+  const orderBy = sortByOptions[sortBy];
+
+  // Construct the query options
+  const queryOptions: any = {
     where: conditions.length > 0 ? and(...conditions) : undefined,
-  });
+    // Include orderBy only if a valid sort option exists
+    ...(orderBy ? { orderBy: [orderBy] } : {}),
+    // Implement pagination if needed
+    // skip: (page - 1) * pageSize,
+    // take: pageSize,
+  };
 
-  return allTutors;
-
-
+  try {
+    // Execute the query
+    const allTutors = await db.query.tutors.findMany(queryOptions);
+    return allTutors;
+  } catch (error) {
+    console.error("Error fetching tutors:", error);
+    throw error; 
+  }
 };
 
 export const getOneTutor = async (tutorId: string) => {
