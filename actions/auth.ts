@@ -1,15 +1,16 @@
 "use server";
 import { cookies } from "next/headers";
 import { signin, signup } from "@/utils/index";
-import { z, ZodError } from "zod";
+import { z } from "zod";
 import { redirect } from "next/navigation";
 import { COOKIE_NAME } from "@/utils/constants";
 
 export type State = {
   errors?: {
-    emailError?: string;
-    passError?: string;
+    email?: string;
+    password?: string;
   };
+  message?: string | null;
 };
 
 const authSchema = z.object({
@@ -19,14 +20,24 @@ const authSchema = z.object({
 });
 
 export const registerUser = async (prevState: any, formData: FormData) => {
-  const data = authSchema.parse({
+  const data = authSchema.safeParse({
     email: formData.get("email"),
     password: formData.get("password"),
     role: "user",
   });
 
+  if (!data.success) {
+    return {
+      errors: data.error.flatten().fieldErrors,
+      message: "Missing Fields. Failed to Sign up.",
+    };
+  }
+
   try {
-    const { token } = await signup(data);
+    const {
+      data: { email, password, role },
+    } = data;
+    const { token } = await signup({ email, password, role });
     cookies().set(COOKIE_NAME, token);
   } catch (e) {
     return { message: "Failed to sign you up" };
@@ -40,7 +51,6 @@ export const signinUser = async (prevState: any, formData: FormData) => {
     password: formData.get("password"),
     role: "user",
   });
-  console.log(data.data?.password, "pass");
 
   if (!data.success) {
     return {
@@ -56,7 +66,7 @@ export const signinUser = async (prevState: any, formData: FormData) => {
 
     cookies().set(COOKIE_NAME, token);
   } catch (e) {
-    return { message: "couldent lig in" };
+    return { message: "couldn't lig in" };
   }
   redirect("/dashboard");
 };
