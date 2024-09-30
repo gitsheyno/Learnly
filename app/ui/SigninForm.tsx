@@ -6,13 +6,18 @@ import { signinUser } from "@/actions/auth";
 import Link from "next/link";
 import Submit from "./SubmitButton";
 
-const initState = { message: null };
+export type State = {
+  errors?: {
+    emailError?: string;
+    passError?: string;
+  };
+  message?: string | null;
+};
+
+const initState: State = { message: null, errors: {} };
 
 const SigninForm = () => {
-  const [formState, action] = useFormState<{ message: string | null }>(
-    signinUser as any,
-    initState,
-  );
+  const [formState, action] = useFormState<State>(signinUser as any, initState);
 
   return (
     <form
@@ -22,7 +27,7 @@ const SigninForm = () => {
       <h3 className="my-4">Sign in</h3>
       <Input
         fullWidth
-        required
+        // required
         size="lg"
         placeholder="Email"
         name="email"
@@ -31,7 +36,7 @@ const SigninForm = () => {
       <Input
         name="password"
         fullWidth
-        required
+        // required
         size="lg"
         type="password"
         placeholder="Password"
@@ -40,7 +45,17 @@ const SigninForm = () => {
       <div>
         <Link href="/signup">{`Don't have an account?`}</Link>
       </div>
-      {formState?.message && <p>{formState.message}</p>}
+      <div id="customer-error" aria-live="polite" aria-atomic="true">
+        {formState.errors && (
+          <>
+            {Object.entries(formState.errors).map(([key, value]) => (
+              <p className="mt-2 text-sm text-red-500" key={key}>
+                {value as string}
+              </p>
+            ))}
+          </>
+        )}
+      </div>
     </form>
   );
 };

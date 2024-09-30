@@ -2,6 +2,7 @@ import React from "react";
 import Image from "next/image";
 import sample from "../../public/sample.png";
 import { Button } from "@nextui-org/react";
+import { Link } from "@nextui-org/react";
 import { IoIosArrowForward } from "react-icons/io";
 export default function Banner() {
   return (
@@ -20,6 +21,8 @@ export default function Banner() {
             Learn faster with your best language tutor.
           </h1>
           <Button
+            href="/signin"
+            as={Link}
             variant="shadow"
             className="w-full md:w-60 bg-black text-white"
           >
