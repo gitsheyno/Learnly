@@ -1,7 +1,7 @@
 import React from "react";
 import Booking from "component/Booking";
-import { getCurrentUser } from "@/utils/index";
-import { getOneTutor } from "@/utils/index";
+import { getCurrentUser } from "@/utils";
+import { getOneTutor } from "@/utils";
 
 type TutorCard = {
   category?: string;

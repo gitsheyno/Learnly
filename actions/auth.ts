@@ -1,9 +1,9 @@
 "use server";
 import { cookies } from "next/headers";
-import { signin, signup } from "@/utils/index";
+import { signin, signup } from "@/utils";
 import { z } from "zod";
 import { redirect } from "next/navigation";
-import { COOKIE_NAME } from "@/utils/constants";
+import { COOKIE_NAME } from "@/utils";
 
 export type State = {
   errors?: {

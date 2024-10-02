@@ -1,7 +1,7 @@
 import React from "react";
 import TutorList from "component/TutorList";
 import TutorFilter from "component/TutorFilter";
-import { getCurrentUser } from "@/utils/index";
+import { getCurrentUser } from "@/utils";
 
 export default async function page({
   searchParams,

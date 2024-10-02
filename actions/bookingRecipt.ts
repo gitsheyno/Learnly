@@ -2,7 +2,7 @@
 
 import { db } from "@/db/db";
 import { messages } from "@/db/schema";
-import { getCurrentUser } from "@/utils/users";
+import { getCurrentUser } from "@/utils";
 import { eq } from "drizzle-orm";
 import { revalidateTag } from "next/cache";
 

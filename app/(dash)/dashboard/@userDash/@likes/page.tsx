@@ -1,7 +1,7 @@
 import React from "react";
 import UserLikes from "component/UserLikes";
-import { getCurrentUser } from "@/utils/index";
-import { getFavoriteTutor } from "@/utils/index";
+import { getCurrentUser } from "@/utils";
+import { getFavoriteTutor } from "@/utils";
 
 type TutorCard = {
   tutorId: string;

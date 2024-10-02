@@ -1,5 +1,5 @@
 import React from "react";
-import { getCurrentUser } from "@/utils/users";
+import { getCurrentUser } from "@/utils";
 
 const Dash = async ({
   children,

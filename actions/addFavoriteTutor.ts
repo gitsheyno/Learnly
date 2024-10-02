@@ -1,8 +1,7 @@
 "use server";
-import { getCurrentUser } from "@/utils/users";
+import { getCurrentUser } from "@/utils";
 import { revalidateTag } from "next/cache";
-import { addFavorite, removeFromFavorite } from "@/utils/getTutors";
-import { getFavoriteTutor } from "@/utils/getTutors";
+import { addFavorite, removeFromFavorite, getFavoriteTutor } from "@/utils";
 
 type TutorCard = {
   id: string;

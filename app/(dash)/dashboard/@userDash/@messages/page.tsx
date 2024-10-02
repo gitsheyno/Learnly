@@ -1,7 +1,7 @@
 import React from "react";
 import UserMessages from "component/UserMessages";
-import { getCurrentUser } from "@/utils/index";
-import { getMessages } from "@/utils/index";
+import { getCurrentUser } from "@/utils";
+import { getMessages } from "@/utils";
 
 type Message = {
   description: string | null;
