@@ -50,61 +50,60 @@ export default function UserLikes({ data }: { data: TutorCard[] }) {
         <ModalContent>
           {(onClose) => (
             <>
-              <ModalBody>
+              <ModalBody className="py-6">
+                <h3 className="text-lg font-medium mb-4">Favorite Tutors</h3>
                 {data.length ? (
                   <>
-                    <div className="mt-6  py-2">
-                      <div className=" flex flex-col gap-2">
-                        {data.map((item, index) => (
-                          <div
-                            key={index}
-                            className=" border-1  flex gap-2 justify-between pl-2 items-center"
-                          >
-                            <div
-                              className="flex items-center gap-2"
-                              key={item.tutorId}
-                            >
-                              <Avatar
-                                alt={item.tutorName as string}
-                                className="flex-shrink-0"
-                                size="lg"
-                                src={item.tutorImage as string}
-                              />
-                              <div className="flex flex-col">
-                                <span className="text-small">
-                                  {item.tutorName}
-                                </span>
-                                <span className="text-tiny text-default-400">
-                                  {item.tutorCategory}
-                                </span>
-                              </div>
-                            </div>
-                            <div className="flex flex-col">
-                              <div className="border-l-1 border-b-1 flex-1  py-3 px-3 flex items-center justify-center hover:bg-gray-500 hover:text-white cursor-pointer">
-                                <FaArrowCircleRight
-                                  className="text-xl "
-                                  tabIndex={0}
-                                />
-                              </div>
-                              <div className="border-l-1 flex-1 py-3 px-3 hover:bg-gray-500 hover:text-white cursor-pointer">
-                                <MdOutlineDeleteOutline
-                                  tabIndex={0}
-                                  onClick={() => addFavoriteTutor(item.tutorId)}
-                                  className="text-xl"
-                                />
-                              </div>
+                    <div className="space-y-3">
+                      {data.map((item, index) => (
+                        <div
+                          key={index}
+                          className="border rounded-md flex justify-between items-center overflow-hidden"
+                        >
+                          <div className="flex items-center gap-3 p-3">
+                            <Avatar
+                              alt={item.tutorName as string}
+                              className="flex-shrink-0"
+                              size="md"
+                              src={item.tutorImage as string}
+                            />
+                            <div>
+                              <p className="font-medium">{item.tutorName}</p>
+                              <p className="text-sm text-gray-500">
+                                {item.tutorCategory}
+                              </p>
+                              {item.tutorCost && (
+                                <p className="text-sm text-gray-600">
+                                  {item.tutorCost}/{item.tutorSession}
+                                </p>
+                              )}
                             </div>
                           </div>
-                        ))}
-                      </div>
+                          <div className="flex h-full">
+                            <button
+                              className="h-full border-l px-4 py-3 hover:bg-gray-50 transition-colors"
+                              aria-label="View tutor profile"
+                            >
+                              <FaArrowCircleRight className="text-gray-600" />
+                            </button>
+                            <button
+                              onClick={() => addFavoriteTutor(item.tutorId)}
+                              className="h-full border-l px-4 py-3 hover:bg-gray-50 transition-colors"
+                              aria-label="Remove from favorites"
+                            >
+                              <MdOutlineDeleteOutline className="text-gray-600" />
+                            </button>
+                          </div>
+                        </div>
+                      ))}
                     </div>
                   </>
                 ) : (
-                  <div className="flex flex-col gap-4 justify-center items-center py-6">
-                    <p className="font-bold text-2xl">
+                  <div className="text-center py-6">
+                    <p className="font-medium text-xl mb-2">
                       No favorite tutors here yet
                     </p>
-                    <p>
+                    <p className="text-gray-600">
                       Browse and favorite tutors on the &quot;Find tutors&quot;
                       page. View and book your favorites here anytime.
                     </p>
@@ -116,7 +115,7 @@ export default function UserLikes({ data }: { data: TutorCard[] }) {
                   Close
                 </Button>
 
-                <Button className="bg-pink-400 text-black" onPress={onClose}>
+                <Button color="primary" onPress={onClose}>
                   Browse tutors
                 </Button>
               </ModalFooter>

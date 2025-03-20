@@ -1,10 +1,11 @@
 "use client";
-
 import { useFormState } from "react-dom";
-import { Input, Button } from "@nextui-org/react";
+import { Input, Divider, Card, CardBody, CardHeader } from "@nextui-org/react";
 import { registerUser } from "@/actions/auth";
 import Link from "next/link";
 import Submit from "./SubmitButton";
+import { FiMail, FiLock, FiAlertCircle } from "react-icons/fi";
+
 export type State = {
   errors?: {
     email?: string;
@@ -12,6 +13,7 @@ export type State = {
   };
   message?: string | null;
 };
+
 const initState: State = { message: null, errors: {} };
 
 const SignupForm = () => {
@@ -21,53 +23,89 @@ const SignupForm = () => {
   );
 
   return (
-    <form
-      action={action}
-      className="bg-content1 border border-default-100 shadow-lg rounded-md p-3 flex flex-col gap-2 "
-    >
-      <h3 className="my-4">Sign up</h3>
-      <Input
-        fullWidth
-        size="lg"
-        placeholder="Email"
-        name="email"
-        type="email"
-        aria-describedby="email-error"
-      />
-      {formState.errors?.email && (
-        <p id="email-error" className="mt-2 text-sm text-red-500">
-          {formState.errors.email}
+    <Card className="max-w-md w-full mx-auto shadow-xl border-none" isBlurred>
+      <CardHeader className="flex flex-col gap-1 pb-0 pt-6 px-6">
+        <h2 className="text-2xl font-bold">Create an account</h2>
+        <p className="text-sm text-default-500">
+          Sign up to start your learning journey
         </p>
-      )}
-
-      <Input
-        name="password"
-        fullWidth
-        size="lg"
-        type="password"
-        placeholder="Password"
-        aria-describedby="password-error"
-      />
-      {formState.errors?.password && (
-        <p id="password-error" className="mt-2 text-sm text-red-500">
-          {formState.errors.password}
-        </p>
-      )}
-      <Submit label={"signup"} />
-      <div>
-        <Link href="/signin">{`Already have an account?`}</Link>
-      </div>
-
-      {formState.message && (
-        <div
-          className="mt-2 text-sm text-red-500"
-          aria-live="polite"
-          aria-atomic="true"
-        >
-          {formState.message}
-        </div>
-      )}
-    </form>
+      </CardHeader>
+      <CardBody className="px-6 py-5">
+        <form action={action} className="flex flex-col gap-4">
+          <div className="flex flex-col gap-1">
+            <Input
+              fullWidth
+              size="lg"
+              placeholder="Email address"
+              name="email"
+              type="email"
+              aria-describedby="email-error"
+              startContent={<FiMail className="text-default-400" />}
+              classNames={{
+                inputWrapper: formState.errors?.email
+                  ? "border-2 border-danger focus-within:!border-danger"
+                  : "focus-within:border-primary",
+              }}
+            />
+            {formState.errors?.email && (
+              <p
+                id="email-error"
+                className="flex items-center gap-1 text-sm text-danger mt-1"
+              >
+                <FiAlertCircle size={14} />
+                {formState.errors.email}
+              </p>
+            )}
+          </div>
+          <div className="flex flex-col gap-1">
+            <Input
+              name="password"
+              fullWidth
+              size="lg"
+              type="password"
+              placeholder="Password"
+              aria-describedby="password-error"
+              startContent={<FiLock className="text-default-400" />}
+              classNames={{
+                inputWrapper: formState.errors?.password
+                  ? "border-2 border-danger focus-within:!border-danger"
+                  : "focus-within:border-primary",
+              }}
+            />
+            {formState.errors?.password && (
+              <p
+                id="password-error"
+                className="flex items-center gap-1 text-sm text-danger mt-1"
+              >
+                <FiAlertCircle size={14} />
+                {formState.errors.password}
+              </p>
+            )}
+          </div>
+          <Submit label="Sign Up" />
+          {formState.message && (
+            <div
+              className="p-3 bg-danger-50 border border-danger-200 text-danger rounded-lg flex items-center gap-2 mt-2"
+              aria-live="polite"
+              aria-atomic="true"
+            >
+              <FiAlertCircle />
+              {formState.message}
+            </div>
+          )}
+          <Divider className="my-4" />
+          <div className="text-center">
+            <span className="text-default-500">Already have an account? </span>
+            <Link
+              href="/signin"
+              className="text-primary font-medium hover:underline"
+            >
+              Sign in
+            </Link>
+          </div>
+        </form>
+      </CardBody>
+    </Card>
   );
 };
 

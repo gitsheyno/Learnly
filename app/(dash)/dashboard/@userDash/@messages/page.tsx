@@ -4,8 +4,14 @@ import { getCurrentUser } from "@/utils";
 import { getMessages } from "@/utils";
 
 type Message = {
+  id?: string;
   description: string | null;
   status: string;
+  createdAt?: Date;
+  sender?: {
+    name: string;
+    avatar?: string;
+  };
 };
 export default async function page() {
   const user = await getCurrentUser();

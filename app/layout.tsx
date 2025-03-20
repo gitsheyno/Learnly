@@ -17,14 +17,12 @@ export default function RootLayout({
   infos,
   categories,
   guides,
-  tutorslider,
   becomeTutor,
 }: {
   children: React.ReactNode;
   infos: React.ReactNode;
   guides: React.ReactNode;
   categories: React.ReactNode;
-  tutorslider: React.ReactNode;
   becomeTutor: React.ReactNode;
 }) {
   return (
@@ -35,7 +33,6 @@ export default function RootLayout({
           <RootLayoutComponents
             infos={infos}
             categories={categories}
-            tutorslider={tutorslider}
             guides={guides}
             becomeTutor={becomeTutor}
           >

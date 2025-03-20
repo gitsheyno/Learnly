@@ -71,7 +71,7 @@ const guideData: Guide[] = [
 
 export default function Guides() {
   return (
-    <section className="max-w-6xl px-6 text-center  mx-auto flex flex-col justify-between items-center mt-60">
+    <section className="max-w-6xl px-6 text-center  mx-auto flex flex-col justify-between items-center mt-12">
       <h2 className="text-5xl font-bold mb-16">How Learnly works:</h2>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3  gap-4">
         {guideData.map((item, index) => (

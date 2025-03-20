@@ -11,7 +11,7 @@ export function middleware(request: NextRequest) {
   }
 
   if (request.nextUrl.pathname.startsWith("/tutors")) {
-    if (request.cookies.has(COOKIE_NAME)) {
+    if (!request.cookies.has(COOKIE_NAME)) {
       return NextResponse.redirect(new URL("/dashboard", request.url));
     }
   }
